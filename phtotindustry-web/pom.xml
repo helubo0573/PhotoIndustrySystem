@@ -19,8 +19,8 @@
     </dependency>
     <dependency>
     	<groupId>com.stone.PhotoIndustrySystem</groupId>
-    	<artifactId>photoindustry-core-0.0.1-SNAPSHOT</artifactId>
-    	<version>0.0.1</version>
+    	<artifactId>photoindustry-core</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       	<groupId>junit</groupId>
