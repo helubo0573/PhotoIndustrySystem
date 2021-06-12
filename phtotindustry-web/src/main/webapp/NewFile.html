@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body style="margin: 200px 300px 300px 300px">
+	<table class="table table-bordered" style="width: 400px;height: 400px;margin-bottom: 30px">
+	    <tbody>
+	      <tr style="height: 80px">
+	        <td id="num1" data-num="1" width="80px"></td>
+	        <td id="num2" data-num="2" width="80px"></td>
+	        <td id="num3" data-num="3" width="80px"></td>
+	        <td id="num4" data-num="4" width="80px"></td>
+	        <td id="num5" data-num="5" width="80px"></td>
+	      </tr>
+	      <tr style="height: 80px">
+	        <td id="num6" data-num="6"></td>
+	        <td id="num7" data-num="7"></td>
+	        <td id="num8" data-num="8"></td>
+	        <td id="num9" data-num="9"></td>
+	        <td id="num10" data-num="10"></td>
+	      </tr>
+	      <tr style="height: 80px">
+	        <td id="num11" data-num="11"></td>
+	        <td id="num12" data-num="12"></td>
+	        <td id="num13" data-num="13"></td>
+	        <td id="num14" data-num="14"></td>
+	        <td id="num15" data-num="15"></td>
+	      </tr>
+	      <tr style="height: 80px">
+	        <td id="num16" data-num="16"></td>
+	        <td id="num17" data-num="17"></td>
+	        <td id="num18" data-num="18"></td>
+	        <td id="num19" data-num="19"></td>
+	        <td id="num20" data-num="20"></td>
+	      </tr>
+	      <tr style="height: 80px">
+	        <td id="num21" data-num="21"></td>
+	        <td id="num22" data-num="22"></td>
+	        <td id="num23" data-num="23"></td>
+	        <td id="num24" data-num="24"></td>
+	        <td id="num25" data-num="25"></td>
+	      </tr>
+	    </tbody>
+</table>
+<div class="h3">
+	<label id="time-lb" style="margin-right: 20px"></label>秒
+	<button class="btn btn-info" id="state-btn" data-state="0">开始</button>
+</div>
+</body>
+<script type="text/javascript">
+var flag=true;
+$("#state-btn").click(function(){
+	if($(this).attr("data-state")==0){
+		var s=0;
+		while(flag){
+			s++;
+			sleep(100);
+			$("#time-lb").html(s);
+		}		
+	}else{
+		
+	}
+})
+</script>
+</html>
