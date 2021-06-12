@@ -19,7 +19,11 @@ import com.stone.photoindustry.core.common.constant.Constant;
 import com.stone.photoindustry.core.common.uti.ServletUtils;
 
 
-
+/**
+ * 	身份验证失败响应
+ * @author Administrator
+ *
+ */
 @SuppressWarnings("unused")
 public class AccessAuthenticationFailureHandler implements AuthenticationFailureHandler{
 

@@ -19,7 +19,11 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stone.photoindustry.core.common.constant.Constant;
-
+/**
+ * 	身份验证失败响应
+ * @author Administrator
+ *
+ */
 @SuppressWarnings("deprecation")
 public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHandler{
 	protected final Log logger = LogFactory.getLog(getClass());

@@ -16,7 +16,11 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stone.photoindustry.core.common.constant.Constant;
-
+/**
+ * 	身份验证成功响应
+ * @author Administrator
+ *
+ */
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
 	public AjaxAuthenticationSuccessHandler()
