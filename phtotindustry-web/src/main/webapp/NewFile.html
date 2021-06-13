@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>舒尔特专注力锻炼法</title>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 <style type="text/css">
 td{
@@ -70,9 +70,11 @@ $("#state-btn").click(function(){
 			$("#num"+i).html(arr[i-1]);
 		}
 		$(this).attr("data-state","1");
+		$(this).text("停止");
 	}else{
 		timeStop();
 		$(this).attr("data-state","0");
+		$(this).text("开始");
 	}
 })
 function timeStart(){
