@@ -4,11 +4,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<style type="text/css">
+td{
+	padding:20px;
+	font-weight: bolder;
+}
+</style>
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body style="margin: 200px 300px 300px 300px">
-	<table class="table table-bordered" style="width: 400px;height: 400px;margin-bottom: 30px">
+	<table class="table table-bordered text-center" style="width: 400px;height: 400px;margin-bottom: 30px;font-size: 36px">
 	    <tbody>
 	      <tr style="height: 80px">
 	        <td id="num1" data-num="1" width="80px"></td>
@@ -48,23 +54,50 @@
 	    </tbody>
 </table>
 <div class="h3">
-	<label id="time-lb" style="margin-right: 20px"></label>秒
+	<label id="time-lb" style="margin-right: 20px">0</label>秒
 	<button class="btn btn-info" id="state-btn" data-state="0">开始</button>
 </div>
 </body>
 <script type="text/javascript">
-var flag=true;
+var timeout=null;
+var time=0;
 $("#state-btn").click(function(){
-	if($(this).attr("data-state")==0){
-		var s=0;
-		while(flag){
-			s++;
-			sleep(100);
-			$("#time-lb").html(s);
-		}		
+	var arr=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+	if($(this).attr("data-state")=="0"){
+		timeStart();
+		arr=shuffle(arr);
+		for(var i=1;i<=26;i++){
+			$("#num"+i).html(arr[i-1]);
+		}
+		$(this).attr("data-state","1");
 	}else{
-		
+		timeStop();
+		$(this).attr("data-state","0");
 	}
 })
+function timeStart(){
+	timeout=window.setTimeout(function(){
+		time++;
+		$("#time-lb").html(time);
+		timeStart();
+	},1000);
+}
+function timeStop(){
+	window.clearTimeout(timeout);
+	timeout=null;
+	time=0;
+	$("#time-lb").html(time);
+}
+function shuffle(arr) {
+    for (let i=arr.length-1; i>=0; i--) {
+        let rIndex = Math.floor(Math.random()*(i+1));
+        // 打印交换值
+        // console.log(i, rIndex);
+        let temp = arr[rIndex];
+        arr[rIndex] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
 </script>
 </html>
