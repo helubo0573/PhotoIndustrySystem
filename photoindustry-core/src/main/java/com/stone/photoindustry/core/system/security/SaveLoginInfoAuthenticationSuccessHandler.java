@@ -26,7 +26,9 @@ import org.springframework.stereotype.Service;
 import com.stone.photoindustry.core.common.constant.Constant;
 import com.stone.photoindustry.core.common.constant.SystemConstant;
 import com.stone.photoindustry.core.common.uti.ServletUtils;
+import com.stone.photoindustry.core.domain.Role;
 import com.stone.photoindustry.core.domain.User;
+import com.stone.photoindustry.core.service.RoleService;
 import com.stone.photoindustry.core.service.UserService;
 
 
@@ -36,7 +38,7 @@ public class SaveLoginInfoAuthenticationSuccessHandler extends SimpleUrlAuthenti
 	public static final Logger logger = LoggerFactory.getLogger(SaveLoginInfoAuthenticationSuccessHandler.class);
 
 	@Autowired
-	private SysRoleService sysroleService;
+	private RoleService roleService;
 
 	@Autowired
 	private UserService userService;
@@ -60,10 +62,10 @@ public class SaveLoginInfoAuthenticationSuccessHandler extends SimpleUrlAuthenti
 			context.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			context.put(Constant.RESPONSE_CODE_MSG, "登录成功");
 			ServletUtils.writeToResponse(response, context);
-			List<SysRole> roleList = sysroleService.getRoleListByUserId(op.getId());
+			List<Role> roleList = roleService.getRoleListByUserId(op.getId());
 			List<Long> roleIdList = new ArrayList<Long>();
 			// 转换用户的角色为用户授权, 并记录用户角色Id列表
-			for (SysRole role : roleList){
+			for (Role role : roleList){
 				roleIdList.add(role.getId());
 			}
 			session.setAttribute("roleList", roleIdList);

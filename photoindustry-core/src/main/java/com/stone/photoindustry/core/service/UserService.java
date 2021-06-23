@@ -12,4 +12,10 @@ import com.stone.photoindustry.core.domain.User;
  */
 public interface UserService extends BaseService<User, Long>{
 
+	void editUserLoginInfo(User op);
+
+	User getUserByUserName(String userName);
+
+	void editUserPassWord(User op);
+
 }

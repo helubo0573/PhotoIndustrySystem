@@ -9,6 +9,7 @@
         <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
         <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
         <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="VARCHAR" />
         <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
         <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
         <result column="status" property="status" jdbcType="INTEGER" />
@@ -16,7 +17,7 @@
     
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,user_name,user_password,user_mobile,user_email,register_date,login_time,status 
+        id,user_name,user_password,user_mobile,user_email,company_id,register_date,login_time,status 
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
@@ -33,6 +34,9 @@
             </if>
             <if test="userMobile != null and userMobile != '' ">
                 and user_mobile = #{userMobile,jdbcType=VARCHAR}
+            </if>
+            <if test="companyId != null and companyId != '' ">
+                and company_id = #{companyId,jdbcType=VARCHAR}
             </if>
             <if test="userEmail != null and userEmail != '' ">
                 and user_email = #{userEmail,jdbcType=VARCHAR}
@@ -51,7 +55,7 @@
     
     
     <insert id="save" parameterType="com.stone.photoindustry.core.domain.User">
-        insert into user(user_name,user_password,user_mobile,user_email,register_date,login_time,status)values(#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userMobile,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},#{registerDate,jdbcType=TIMESTAMP},#{loginTime,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER})
+        insert into user(user_name,user_password,user_mobile,user_email,company_id,register_date,login_time,status)values(#{userName,jdbcType=VARCHAR},#{userPassword,jdbcType=VARCHAR},#{userMobile,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},#{company_id,jdbcType=VARCHAR},#{registerDate,jdbcType=TIMESTAMP},#{loginTime,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER})
     </insert>
 
     
@@ -61,6 +65,7 @@
             user_password = #{userPassword,jdbcType=VARCHAR},
             user_mobile = #{userMobile,jdbcType=VARCHAR},
             user_email = #{userEmail,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=VARCHAR},
             register_date = #{registerDate,jdbcType=TIMESTAMP},
             login_time = #{loginTime,jdbcType=TIMESTAMP},
             status = #{status,jdbcType=INTEGER}
@@ -82,6 +87,9 @@
             </if>
             <if test="userEmail != null and userEmail != '' ">        
                 user_email = #{userEmail,jdbcType=VARCHAR},                
+            </if>
+            <if test="companyId != null and userEmail != '' ">        
+                company_id = #{companyId,jdbcType=VARCHAR},                
             </if>
             <if test="registerDate != null">
                 register_date = #{registerDate,jdbcType=TIMESTAMP},                

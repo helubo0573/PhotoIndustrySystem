@@ -33,5 +33,23 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	public BaseMapper<User, Long> getMapper() {
 		return userMapper;
 	}
+
+	@Override
+	public void editUserLoginInfo(User op) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public User getUserByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void editUserPassWord(User op) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

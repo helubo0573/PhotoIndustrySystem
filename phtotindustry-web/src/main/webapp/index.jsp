@@ -18,7 +18,7 @@
 		<form class="layui-form">
 			<div class="layui-form-item">
 				<label class="layui-form-label">用户名</label>
-              	<div class="layui-input-block">
+              	<div class= "layui-input-block">
                 	<input id="username" class="layui-input" placeholder="请输入账号">
               	</div> 
 			</div>

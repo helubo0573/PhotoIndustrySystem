@@ -22,7 +22,11 @@ import org.springframework.util.StringUtils;
 
 import com.stone.photoindustry.core.common.constant.SystemConstant;
 import com.stone.photoindustry.core.common.exception.ServiceException;
+import com.stone.photoindustry.core.domain.Role;
 import com.stone.photoindustry.core.domain.User;
+import com.stone.photoindustry.core.model.MenuModel;
+import com.stone.photoindustry.core.service.MenuService;
+import com.stone.photoindustry.core.service.RoleService;
 import com.stone.photoindustry.core.service.UserService;
 import tool.util.StringUtil;
 
@@ -37,10 +41,10 @@ public class UserRoleDetailProvider implements UserDetailsService{
 	private UserService UserService;
 
 	@Autowired
-	private SysRoleService sysRoleService;
+	private RoleService RoleService;
 
 	@Autowired
-	private SysMenuService sysMenuService;
+	private MenuService MenuService;
 
 	private PasswordEncoder passwordEncoder;
 
@@ -52,7 +56,7 @@ public class UserRoleDetailProvider implements UserDetailsService{
 		if (user == null)	throw new UsernameNotFoundException("用户名:"+userName + ",不存在!");
 		Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();		// 用户授权集合
 		Map<String, UserFunction> functionMap = new HashMap<String, UserFunction>();// 用户资源映射<资源名称, 资源属性集合>
-		List<SysRole> roleList = sysRoleService.getRoleListByUserId(user.getId());	// 根据用户Id获得用户角色列表
+		List<Role> roleList = RoleService.getRoleListByUserId(user.getId());	// 根据用户Id获得用户角色列表
 		auths.add(new MGrantedAuthority(SystemConstant.ROLE_DEFAULT));			// 设置默认权限
 		if (roleList != null && !roleList.isEmpty()){
 			List<Long> roleIdList = new ArrayList<Long>();
@@ -60,7 +64,7 @@ public class UserRoleDetailProvider implements UserDetailsService{
 				auths.add(new MGrantedAuthority(role.getId().toString()));
 				roleIdList.add(role.getId());
 			});
-			List<MenuModel> menuList = sysMenuService.getMenuListByRoleIds(roleIdList);		// 根据用户角色Id列表获得该角色拥有的系统功能列表
+			List<MenuModel> menuList = MenuService.getMenuListByRoleIds(roleIdList);		// 根据用户角色Id列表获得该角色拥有的系统功能列表
 			if (menuList != null && !menuList.isEmpty()){
 				menuList.forEach(menu->{	// 转换系统功能为用户资源
 					String href = menu.getUrl();

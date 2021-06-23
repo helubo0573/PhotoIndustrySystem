@@ -10,28 +10,28 @@ public class UserFunction implements Serializable{
 
 	private static final long serialVersionUID = -260181556678341867L;
 
-	private int id;
+	private Long id;
 
 	private Collection<ConfigAttribute> roles;
 
-	public UserFunction(int id)
+	public UserFunction(Long id)
 	{
 		this.id = id;
 		roles = new ArrayList<ConfigAttribute>();
 	}
 
-	public UserFunction(int id, Collection<ConfigAttribute> roles)
+	public UserFunction(Long id, Collection<ConfigAttribute> roles)
 	{
 		this.id = id;
 		this.roles = roles;
 	}
 
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

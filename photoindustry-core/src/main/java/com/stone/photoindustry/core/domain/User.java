@@ -29,6 +29,8 @@ import java.util.Date;
     /*** 用户邮箱*/
     private String userEmail;
 
+    /*** 所属公司ID*/
+    private String companyId;
     /*** */
     private Date registerDate;
 
@@ -166,5 +168,13 @@ import java.util.Date;
     public void setStatus(Integer status){
         this.status = status;
     }
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 
 }
