@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- role_menu表:角色表菜单映射表模块 -->
-<mapper namespace="com.stone.photoindustry.rolemenu.mapper.RoleMapper">
+<!-- user_role表:用户角色映射表模块 -->
+<mapper namespace="com.stone.photoindustry.core.mapper.UserRoleMapper">
     <!--返回Map-->        
-    <resultMap id="BaseResultMap" type="com.stone.photoindustry.rolemenu.domain.Role">
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.UserRole">
         <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="role_id" property="roleId" jdbcType="INTEGER" />
-        <result column="menu_id" property="menuId" jdbcType="INTEGER" />
         <result column="company_id" property="companyId" jdbcType="VARCHAR" />
     </resultMap>
     
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,role_id,menu_id,company_id 
+        id,user_id,role_id,company_id 
     </sql>
     
     <!-- 基本的sql查询条件公共引用 -->
@@ -21,11 +21,11 @@
             <if test=" id != null and id != '' ">
                 id  = #{id,jdbcType=INTEGER}
             </if>
+            <if test="userId != null and userId != '' ">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
             <if test="roleId != null and roleId != '' ">
                 and role_id = #{roleId,jdbcType=INTEGER}
-            </if>
-            <if test="menuId != null and menuId != '' ">
-                and menu_id = #{menuId,jdbcType=INTEGER}
             </if>
             <if test="companyId != null and companyId != '' ">
                 and company_id = #{companyId,jdbcType=VARCHAR}
@@ -34,28 +34,28 @@
     </sql>
     
     
-    <insert id="save" parameterType="com.stone.photoindustry.rolemenu.domain.Role">
-        insert into role_menu(role_id,menu_id,company_id)values(#{roleId,jdbcType=INTEGER},#{menuId,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR})
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.UserRole">
+        insert into user_role(user_id,role_id,company_id)values(#{userId,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR})
     </insert>
 
     
-    <update id="update" parameterType="com.stone.photoindustry.rolemenu.domain.Role">
-        update role_menu set 
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.UserRole">
+        update user_role set 
+            user_id = #{userId,jdbcType=INTEGER},
             role_id = #{roleId,jdbcType=INTEGER},
-            menu_id = #{menuId,jdbcType=INTEGER},
             company_id = #{companyId,jdbcType=VARCHAR}
         where id = #{id ,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateSelective"  parameterType="java.util.HashMap">
-        update role_menu
+        update user_role
           <set>
+            <if test="userId != null and userId != '' ">        
+                user_id = #{userId,jdbcType=INTEGER},                
+            </if>
             <if test="roleId != null and roleId != '' ">        
                 role_id = #{roleId,jdbcType=INTEGER},                
-            </if>
-            <if test="menuId != null and menuId != '' ">        
-                menu_id = #{menuId,jdbcType=INTEGER},                
             </if>
             <if test="companyId != null and companyId != '' ">        
                 company_id = #{companyId,jdbcType=VARCHAR}                
@@ -68,21 +68,21 @@
     <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List" />
-        from role_menu
+        from user_role
         where id = #{id,jdbcType=INTEGER}
     </select>
 
 	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from role_menu
+        from user_role
         <include refid="searchBy"/>
     </select>
                
     <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from role_menu
+        from user_role
         <include refid="searchBy"/>
     </select>
     
