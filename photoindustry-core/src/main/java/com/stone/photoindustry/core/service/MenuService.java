@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.Menu;
+import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.MenuModel;
 
 /**
@@ -16,5 +17,7 @@ import com.stone.photoindustry.core.model.MenuModel;
 public interface MenuService extends BaseService<Menu, Long>{
 
 	List<MenuModel> getMenuListByRoleIds(List<Long> roleIdList);
+
+	List<Menu> getPermsByUser(User user);
 
 }

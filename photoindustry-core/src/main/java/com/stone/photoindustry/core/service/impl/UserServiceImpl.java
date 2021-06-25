@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
 import com.stone.photoindustry.core.mapper.UserMapper;
+import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.UserService;
 
@@ -41,7 +42,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	}
 
 	@Override
-	public User getUserByUserName(String userName) {
+	public UserModel getUserByUserName(String userName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

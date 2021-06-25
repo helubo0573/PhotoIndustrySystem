@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.constant.Constant;
 import com.stone.photoindustry.core.common.constant.SystemConstant;
-import com.stone.photoindustry.core.common.uti.ServletUtils;
+import com.stone.photoindustry.core.common.util.ServletUtils;
 import com.stone.photoindustry.core.domain.Role;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.RoleService;

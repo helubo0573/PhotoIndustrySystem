@@ -15,7 +15,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-import com.stone.photoindustry.core.common.uti.ServletUtils;
+import com.stone.photoindustry.core.common.util.ServletUtils;
 
 
 

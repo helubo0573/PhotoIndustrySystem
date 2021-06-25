@@ -177,7 +177,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/modules/**/*"/>
-			<bean class="com.stone.photoindustry.manage.interceptor.ConLogInterceptor"/>
+			<bean class="com.stone.phtotindustry.manage.interceptor.ConLogInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

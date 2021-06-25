@@ -109,28 +109,37 @@ public class UserRoleDetailProvider implements UserDetailsService{
 		return password;
 	}
 
-	/*
-	 * public UserService getSysUserService() { return UserService; }
-	 * 
-	 * public void setSysUserService(UserService UserService) { this.UserService =
-	 * UserService; }
-	 * 
-	 * public SysRoleService getSysRoleService() { return sysRoleService; }
-	 * 
-	 * public void setSysRoleService(SysRoleService sysRoleService) {
-	 * this.sysRoleService = sysRoleService; }
-	 * 
-	 * public SysMenuService getSysMenuService() { return sysMenuService; }
-	 * 
-	 * public void setSysMenuService(SysMenuService sysMenuService) {
-	 * this.sysMenuService = sysMenuService; }
-	 * 
-	 * public String getSystemPasswordInitialization() { return
-	 * systemPasswordInitialization; }
-	 * 
-	 * public void setSystemPasswordInitialization(String
-	 * systemPasswordInitialization) { this.systemPasswordInitialization =
-	 * systemPasswordInitialization; }
-	 */
+	
+	public UserService getSysUserService() { 
+		return UserService; 
+	}
+	
+	public void setSysUserService(UserService UserService) { 
+		this.UserService =UserService; 
+	}
+	 
+	public RoleService getSysRoleService() { 
+		return RoleService; 
+	}
+	
+	public void setSysRoleService(RoleService sysRoleService) {
+		this.RoleService = sysRoleService; 
+	}
+	
+	public MenuService getSysMenuService() { 
+		return MenuService; 
+	}
+	
+	public void setSysMenuService(MenuService sysMenuService) {
+		this.MenuService = sysMenuService; 
+	}
+	
+	public String getSystemPasswordInitialization() { 
+		return systemPasswordInitialization; 
+	}
+	 
+	public void setSystemPasswordInitialization(String systemPasswordInitialization) { 
+		this.systemPasswordInitialization =systemPasswordInitialization; 
+	}
 
 }

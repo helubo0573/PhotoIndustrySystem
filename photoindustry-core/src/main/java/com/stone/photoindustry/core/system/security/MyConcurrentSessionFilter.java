@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.filter.GenericFilterBean;
 
 import com.stone.photoindustry.core.common.constant.Constant;
-import com.stone.photoindustry.core.common.uti.ServletUtils;
+import com.stone.photoindustry.core.common.util.ServletUtils;
 
 
 

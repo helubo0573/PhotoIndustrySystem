@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 
 import org.apache.log4j.Logger;
 
-import com.stone.photoindustry.core.common.uti.CacheUtil;
+import com.stone.photoindustry.core.common.util.CacheUtil;
 
 
 

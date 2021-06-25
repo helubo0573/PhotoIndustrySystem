@@ -12,7 +12,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.stone.photoindustry.core.common.constant.Constant;
-import com.stone.photoindustry.core.common.uti.ServletUtils;
+import com.stone.photoindustry.core.common.util.ServletUtils;
 
 
 

@@ -2,6 +2,7 @@ package com.stone.photoindustry.core.service;
 
 import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.User;
+import com.stone.photoindustry.core.model.UserModel;
 
 /**
  * 用户表Service
@@ -14,7 +15,7 @@ public interface UserService extends BaseService<User, Long>{
 
 	void editUserLoginInfo(User op);
 
-	User getUserByUserName(String userName);
+	UserModel getUserByUserName(String userName);
 
 	void editUserPassWord(User op);
 

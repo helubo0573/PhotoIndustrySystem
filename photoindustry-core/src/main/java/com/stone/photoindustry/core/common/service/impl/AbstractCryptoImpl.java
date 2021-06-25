@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.stone.photoindustry.core.common.service.Crypto;
 import com.stone.photoindustry.core.common.service.Crypto.Encoding;
-import com.stone.photoindustry.core.common.uti.Base32;
+import com.stone.photoindustry.core.common.util.Base32;
 
 
 

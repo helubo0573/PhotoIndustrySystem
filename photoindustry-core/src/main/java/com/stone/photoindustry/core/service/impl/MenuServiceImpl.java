@@ -13,6 +13,7 @@ import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
 import com.stone.photoindustry.core.mapper.MenuMapper;
 import com.stone.photoindustry.core.model.MenuModel;
 import com.stone.photoindustry.core.domain.Menu;
+import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.MenuService;
 
 
@@ -39,6 +40,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 
 	@Override
 	public List<MenuModel> getMenuListByRoleIds(List<Long> roleIdList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Menu> getPermsByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

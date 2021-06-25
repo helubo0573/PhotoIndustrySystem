@@ -9,16 +9,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
+import com.stone.photoindustry.core.service.MenuService;
 
 
 @Service
 public class PermissionsInterceptor extends HandlerInterceptorAdapter
 {
 
-	@Autowired
-	@Qualifier("sysMenuService")
-//	private SysMenuService sysMenuService;
+	/*
+	 * @Autowired
+	 * 
+	 * @Qualifier("sysMenuService") private MenuService MenuService;
+	 */
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
