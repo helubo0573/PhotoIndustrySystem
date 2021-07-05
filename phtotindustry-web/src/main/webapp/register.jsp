@@ -8,8 +8,8 @@
 
 <link rel="icon" href="./images/favicon-32x32.png" type="image/png" />
 <!-- loader-->
-<link href="./css/pace.min.css" rel="stylesheet" />
-<script src="./js/pace.min.js"></script>
+<!-- <link href="./css/pace.min.css" rel="stylesheet" />
+<script src="./js/pace.min.js"></script> -->
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="./css/bootstrap.min.css" />
 <!-- Icons CSS -->

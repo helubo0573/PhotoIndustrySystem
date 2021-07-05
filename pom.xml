@@ -8,7 +8,7 @@
   	<module>photoindustry-core</module>
   	<module>phtotindustry-web</module>
   </modules>
-  
+ 
   <properties>
   	<org.springframework.version>4.2.5.RELEASE</org.springframework.version>
 	<activiti.version>5.20.0</activiti.version>

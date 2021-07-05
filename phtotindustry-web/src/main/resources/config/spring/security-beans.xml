@@ -9,6 +9,7 @@
 	default-autowire="byName">
 	
        	<!-- 登录页面和静态资源不受Spring Security过滤器保护, 可直接访问 -->
+       	<http pattern="/register.jsp" security="none"/>
 		<http  pattern="/login.htm" security="none" />
 		<http  pattern="/user/*" security="none" />
 		<http  pattern="/favicon.ico" security="none" />

@@ -14,10 +14,9 @@ import com.stone.photoindustry.core.common.util.ServletUtils;
 
 
 @Controller
-@RequestMapping("user")
 public class UserController {
 
-	@RequestMapping("/register")
+	@RequestMapping("user/register")
 	public void RegisterUser(HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException, IOException {
 		
 		ServletUtils.writeToResponse(response, 1);
