@@ -99,9 +99,8 @@ function register(){
 			url:"user/register.do",
 			success:function(data){
 				if(data.code==200){
-					getEmployeePage(1)
-					layer.msg(data.msg)
-					layer.close(index)
+					alert("注册成功");
+					$("#registerinfo input").val("");
 				}
 			}
 		})

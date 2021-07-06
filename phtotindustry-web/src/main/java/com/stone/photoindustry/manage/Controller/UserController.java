@@ -44,7 +44,7 @@ public class UserController {
 			{"user_password",MD5.MD5Encode(password)},
 			{"user_mobile",mobile},
 			{"user_email",email},
-			{"use_rename",rename},
+			{"user_rename",rename},
 			{"register_date",new Date()}
 		}));
 		HashMap<String, Object> res=new HashMap<String, Object>();

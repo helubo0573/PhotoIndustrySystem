@@ -34,11 +34,11 @@
 									</div>
 									<div class="form-group mt-4">
 										<label>账号</label>
-										<input type="text" class="form-control" placeholder="请输入 用户名/邮箱/电话号码" />
+										<input type="text" id="username" class="form-control" placeholder="请输入 用户名/邮箱/电话号码" />
 									</div>
 									<div class="form-group">
 										<label>密码</label>
-										<input type="password" class="form-control" placeholder="输入账号密码" />
+										<input type="password" id="password" class="form-control" placeholder="输入账号密码" />
 									</div>
 									<div class="form-row">
 										<div class="form-group col">
@@ -51,9 +51,7 @@
 										</div>
 									</div>
 									<div class="btn-group mt-3 w-100">
-										<button type="button" class="btn btn-light btn-block">登录</button>
-										<button type="button" class="btn btn-light"><i class="lni lni-arrow-right"></i>
-										</button>
+										<button type="button" class="btn btn-light btn-block" onclick="login()">登录</button>
 									</div>
 									<hr>
 									<div class="text-center">
@@ -75,6 +73,7 @@
 	<!-- end wrapper -->
 </body>
 <script src="./plugins/jquery/jquery-3.3.1.min.js"></script>
+<script src="./plugins/encrypt.js"></script>
 <script type="text/javascript">
 $(function(){
 	if (window != top) top.location.href = location.href;
@@ -82,6 +81,40 @@ $(function(){
 function keyLogin(){
  if (event.keyCode==13)  //回车键的键值为13
    $("#loginbt").click(); //调用登录按钮的登录事件
+}
+function login(){
+	var username=$("#username").val().trim();
+	var password=$("#password").val().trim();
+	//var checkcode=$("#code-input").val().trim();
+	if(username==""){
+		alert("用户名不能为空");
+		return;
+	}
+	if(password==""){
+		alert("密码不能为空");
+		return;
+	}
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		url:"user/login.do",
+		data:"username="+username+"&password="+hex_md5(password),
+		success:function(data){
+			if(data.code==200){
+				layer.msg(data.msg)
+				window.location="manage/mainpage.do";
+			}else{
+				layer.msg(data.msg,{time:3000,btn:['确定']})
+				var times = (new Date()).getTime();
+				var urls="user/getimgcode.do?timestamp="+times;
+				$("#codeimg").attr("src",urls)
+			}
+		},
+		error:function(data){
+			alert(data.msg);				
+		}
+	})
 }
 </script>
 </html>
