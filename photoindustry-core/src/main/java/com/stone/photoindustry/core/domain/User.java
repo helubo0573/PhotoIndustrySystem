@@ -29,6 +29,9 @@ import java.util.Date;
     /*** 用户邮箱*/
     private String userEmail;
 
+    /*** 用户昵称*/
+    private String userRename;
+    
     /*** 所属公司ID*/
     private String companyId;
     /*** */
@@ -40,6 +43,22 @@ import java.util.Date;
     /*** 用户状态*/
     private Integer status;
 
+    public User() {	}
+    
+    /**
+     * 	用于新用户注册的实例
+     * @param username
+     * @param password
+     * @param mobile
+     * @param email
+     */
+    public User(String username,String password,String mobile,String email,String rename) {	
+    	setUserName(username);
+    	setUserPassword(password);
+    	setUserMobile(mobile);
+    	setUserEmail(email);
+    	setUserName(rename);
+    }
 
     /*** 获取主键Id
     *
@@ -175,6 +194,14 @@ import java.util.Date;
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getUserRename() {
+		return userRename;
+	}
+
+	public void setUserRename(String userRename) {
+		this.userRename = userRename;
 	}
 
 }

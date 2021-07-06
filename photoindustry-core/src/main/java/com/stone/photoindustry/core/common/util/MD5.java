@@ -1,5 +1,7 @@
 package com.stone.photoindustry.core.common.util;
 
+import java.security.MessageDigest;
+
 import org.springframework.util.DigestUtils;
 
 import com.stone.photoindustry.core.system.security.PasswordEncoder;
@@ -319,6 +321,27 @@ public class MD5
 		return digestHexStr;
 	}
 
+	public static String MD5Encode(String sourceString) {
+		String resultString = null;
+		try {
+			resultString = new String(sourceString);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			resultString = byte2hexString(md.digest(resultString.getBytes()));
+		} catch (Exception localException) {
+		}
+		return resultString;
+	}
+	
+	private static final String byte2hexString(byte[] bytes) {
+		StringBuffer bf = new StringBuffer(bytes.length * 2);
+		for (int i = 0; i < bytes.length; i++) {
+			if ((bytes[i] & 0xFF) < 16) {
+				bf.append("0");
+			}
+			bf.append(Long.toString(bytes[i] & 0xFF, 16));
+		}
+		return bf.toString();
+	}
 	public static void main(String[] args) {
 		String base = "888888";
 		PasswordEncoder pe=new PasswordEncoder();
