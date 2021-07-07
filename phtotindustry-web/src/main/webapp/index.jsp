@@ -102,13 +102,8 @@ function login(){
 		data:"username="+username+"&password="+hex_md5(password),
 		success:function(data){
 			if(data.code==200){
-				layer.msg(data.msg)
-				window.location="manage/mainpage.do";
-			}else{
-				layer.msg(data.msg,{time:3000,btn:['确定']})
-				var times = (new Date()).getTime();
-				var urls="user/getimgcode.do?timestamp="+times;
-				$("#codeimg").attr("src",urls)
+				alert(data.msg)
+				window.location="main/homepage.do";
 			}
 		},
 		error:function(data){

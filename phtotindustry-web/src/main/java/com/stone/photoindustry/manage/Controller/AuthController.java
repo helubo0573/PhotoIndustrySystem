@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stone.photoindustry.core.common.constant.Constant;
+import com.stone.photoindustry.core.common.util.ServletUtils;
 import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.service.UserService;
 import com.stone.photoindustry.core.system.security.PasswordEncoder;
@@ -63,8 +64,6 @@ public class AuthController {
 			session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 			UserModel userinfo=(UserModel) user.getSession().getAttribute("SysUser");
 			session.setAttribute("SysUser", userinfo);
-			
-			
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "登录成功");
 		} catch (IncorrectCredentialsException ex) {
@@ -88,5 +87,6 @@ public class AuthController {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "账号不存在请核对后重新输入");
 		}
+		ServletUtils.writeToResponse(response, res);
 	}
 }

@@ -20,6 +20,7 @@ import com.stone.photoindustry.core.common.util.ServletUtils;
 import com.stone.photoindustry.core.common.util.SqlUtil;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.UserService;
+import com.stone.photoindustry.core.system.security.PasswordEncoder;
 
 
 
@@ -32,6 +33,9 @@ public class UserController {
 	@Resource
 	private UserService userservice;
 	
+	@Resource
+	private PasswordEncoder passwordEncoder;// 密码加密
+	
 	@RequestMapping("user/register")
 	public void RegisterUser(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(name = "account")String account,
@@ -41,7 +45,7 @@ public class UserController {
 			@RequestParam(name="rename")String rename) throws UnsupportedEncodingException, IOException {
 		Long userid=dbService.insert(SqlUtil.buildInsertSqlMap("User", new Object[][] {
 			{"user_name",account},
-			{"user_password",MD5.MD5Encode(password)},
+			{"user_password",passwordEncoder.encodePassword(String.valueOf(MD5.MD5Encode(password)))},
 			{"user_mobile",mobile},
 			{"user_email",email},
 			{"user_rename",rename},
