@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- user_role表:用户角色映射表模块 -->
-<mapper namespace="com.stone.photoindustry.userrole.mapper.RoleMapper">
+<mapper namespace="com.stone.photoindustry.core.mapper.RoleMapper">
     <!--返回Map-->        
-    <resultMap id="BaseResultMap" type="com.stone.photoindustry.userrole.domain.Role">
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.Role">
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="role_id" property="roleId" jdbcType="INTEGER" />
@@ -34,12 +34,12 @@
     </sql>
     
     
-    <insert id="save" parameterType="com.stone.photoindustry.userrole.domain.Role">
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.Role">
         insert into user_role(user_id,role_id,company_id)values(#{userId,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR})
     </insert>
 
     
-    <update id="update" parameterType="com.stone.photoindustry.userrole.domain.Role">
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.Role">
         update user_role set 
             user_id = #{userId,jdbcType=INTEGER},
             role_id = #{roleId,jdbcType=INTEGER},

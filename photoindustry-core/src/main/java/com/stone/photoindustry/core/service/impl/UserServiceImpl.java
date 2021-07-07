@@ -1,5 +1,7 @@
 package com.stone.photoindustry.core.service.impl;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -40,11 +42,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public UserModel getUserByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserByUserName(String username) {
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("userName", username);
+		User user=userMapper.findSelective(param);
+		return user;
+	}
+	@Override
+	public UserModel getUserModelByUserName(String userName) {
+		UserModel user=userMapper.getUserModelByUserName(userName);
+		return user;
 	}
 
 	@Override

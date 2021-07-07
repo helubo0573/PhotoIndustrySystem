@@ -107,7 +107,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:/config/mappers/*.xml</value>
+				<value>classpath*:/mappers/*.xml</value>
 			</list>
 		</property>
 		<property name="configLocation" value="classpath:/config/spring/mybatis-config.xml" />

@@ -77,7 +77,7 @@ public class ShiroRealm extends AuthorizingRealm{
 		// user.login(token) 间接调用
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		// 从数据库中查询用户用信息
-		UserModel user=UserService.getUserByUserName(token.getUsername());
+		UserModel user=UserService.getUserModelByUserName(token.getUsername());
 		if (user == null){
 			throw new UnknownAccountException();// 没找到帐号
 		} else if (user.getStatus() == 2){

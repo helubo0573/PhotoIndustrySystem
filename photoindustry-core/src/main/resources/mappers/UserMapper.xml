@@ -16,11 +16,18 @@
         <result column="status" property="status" jdbcType="INTEGER" />
     </resultMap>
     
+    <resultMap type="com.stone.photoindustry.core.model.UserModel" id="ModelResultMap" extends="BaseResultMap">
+    
+    </resultMap>
+    
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        id,user_name,user_password,user_mobile,user_email,use_rename,company_id,register_date,login_time,status 
+        id,user_name,user_password,user_mobile,user_email,user_rename,company_id,register_date,login_time,status 
     </sql>
     
+    <sql id="Model_Column_List">
+    	id,user_name,user_password,user_mobile,user_email,user_rename,company_id,register_date,login_time,status
+    </sql>
     <!-- 基本的sql查询条件公共引用 -->
     <sql id="searchBy">
         <trim prefix="where" prefixOverrides="and|or">
@@ -134,4 +141,11 @@
         <include refid="searchBy"/>
     </select>
     
+    
+    <select id="getUserModelByUserName" resultMap="ModelResultMap" parameterType="java.lang.String">
+    	select
+    	<include refid="Model_Column_List"/>
+    	from user
+    	where user_name = #{userName}
+    </select>
 </mapper>

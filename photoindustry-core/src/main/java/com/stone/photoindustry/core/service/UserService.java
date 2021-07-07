@@ -15,8 +15,10 @@ public interface UserService extends BaseService<User, Long>{
 
 	void editUserLoginInfo(User op);
 
-	UserModel getUserByUserName(String userName);
+	User getUserByUserName(String userName);
 
 	void editUserPassWord(User op);
+
+	UserModel getUserModelByUserName(String userName);
 
 }
