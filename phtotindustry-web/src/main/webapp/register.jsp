@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>注册你的账号</title>
-
-<link rel="icon" href="./images/favicon-32x32.png" type="image/png" />
 <!-- loader-->
 <!-- <link href="./css/pace.min.css" rel="stylesheet" />
 <script src="./js/pace.min.js"></script> -->

@@ -62,7 +62,7 @@ public class AuthController {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			//还需要研究这一条
 			session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-			UserModel userinfo=(UserModel) user.getSession().getAttribute("SysUser");
+			UserModel userinfo=(UserModel) user.getSession().getAttribute("user");
 			session.setAttribute("SysUser", userinfo);
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "登录成功");

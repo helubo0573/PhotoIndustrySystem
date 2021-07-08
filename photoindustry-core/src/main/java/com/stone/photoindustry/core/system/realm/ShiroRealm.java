@@ -85,7 +85,7 @@ public class ShiroRealm extends AuthorizingRealm{
 		} else{
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();
-			session.setAttribute("SysUser", user);
+			session.setAttribute("user", user);
 			List<Object> principals = new ArrayList<Object>();//用一个MAP对象将用户类和名称直接传到SimpleAuthenticationInfo类的第一个参数中
 			principals.add(user.getUserName());
 			principals.add(user);
