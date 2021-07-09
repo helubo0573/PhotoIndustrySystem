@@ -34,11 +34,11 @@
 										<div class="form-group mt-4">
 											<label>性别</label>
 											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="sex" name="sex" class="custom-control-input" checked="checked" value="0">
+												<input type="radio" id="girl" name="sex" class="custom-control-input" value="0">
 												<label class="custom-control-label" for="customRadioInline1">女</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="sex" name="sex" class="custom-control-input" value="1">
+												<input type="radio" id="boy" name="sex" class="custom-control-input" value="1">
 												<label class="custom-control-label" for="customRadioInline2">男</label>
 											</div>
 										</div>

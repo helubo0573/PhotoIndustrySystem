@@ -10,7 +10,7 @@ id="WebApp_ID" version="2.5">
   	</context-param>
   	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>eloan2.root</param-value>
+		<param-value>photographic.root</param-value>
 	</context-param>
   	<context-param>
   		<param-name>log4jConfigLocation</param-name>
