@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/icons.css" />
 <!-- App CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/app.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/city-picker/css/city-picker.css?dd=202107041">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/city-picker/css/city-picker.css?dd=202107142">	
 </head>
 <body>
 	<div class="wrapper">
@@ -30,32 +30,34 @@
 										<img src="${pageContext.request.contextPath}/images/logo-icon.png" width="80" alt="">
 										<h3 class="mt-4 font-weight-bold">完善你的个人信息</h3>
 									</div>
-									<form id="registerinfo" action="">
+									<form id="detailInfo" action="">
 										<div class="form-group mt-4">
 											<label>性别</label>
 											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="girl" name="sex" class="custom-control-input" value="0">
-												<label class="custom-control-label" for="customRadioInline1">女</label>
+												<input class="form-check-input" type="radio" name="sex" id="girl" value="0" checked> 
+												<label class="form-check-label" for="exampleRadios1">女</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="boy" name="sex" class="custom-control-input" value="1">
-												<label class="custom-control-label" for="customRadioInline2">男</label>
+												<input class="form-check-input" type="radio" name="sex" id="boy" value="1">
+												<label class="form-check-label" for="exampleRadios1">男</label>
 											</div>
 										</div>
 										<div class="form-group">
 											<label>真实姓名</label>
-											<input class="form-control" type="password" name="password" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
+											<input class="form-control" name="autonym" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
 										</div>
 										<div class="form-group">
 											<label>所在地</label>
-											<input class="form-control" type="password" id="repassword" placeholder="重复输入的密码以确保输入正确" />
+											<div style="position: relative;">
+												<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="detail-address">
+											</div>
 										</div>
 										<div class="form-group">
 											<label>身份证号</label>
-											<input type="text" class="form-control" name="email" placeholder="请输入你的邮箱地址" />
+											<input type="text" class="form-control" name="idNumber" placeholder="请输入你的邮箱地址" />
 										</div>
 										<div class="btn-group mt-3 w-100">
-											<button type="button" class="btn btn-light" onclick="register()">保存</button>
+											<button type="button" class="btn btn-light" onclick="sumit()">保存</button>
 										</div>
 									</form>
 									<hr/>
@@ -73,20 +75,24 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=202107149"></script>
 <script type="text/javascript">
-function register(){
+$(function(){
+	$("#detail-address").citypicker();
+})
+function sumit(){
 	if(checkdata()){
 		$.ajax({
 			contenType:'application/json',
 			Type:'POST',
 			dataType:'json',
-			data:$("#registerinfo").serialize(),
-			url:"user/register.do",
+			data:$("#detailInfo").serialize()+"&location="+$("#detail-address").attr("data-code"),
+			url:"../user/detail.do",
 			success:function(data){
+				alert(data.msg);
 				if(data.code==200){
-					alert("注册成功");
 					$("#registerinfo input").val("");
+					window.location="homepage.do";
 				}
 			}
 		})

@@ -22,39 +22,50 @@ import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.UserService;
 import com.stone.photoindustry.core.system.security.PasswordEncoder;
 
-
-
 @Controller
+@RequestMapping("user")
 public class UserController {
 
 	@Resource
-    protected DBService dbService;
-	
+	protected DBService dbService;
+
 	@Resource
 	private UserService userservice;
-	
+
 	@Resource
 	private PasswordEncoder passwordEncoder;// 密码加密
-	
-	@RequestMapping("user/register")
+
+	@RequestMapping("/register")
 	public void RegisterUser(HttpServletResponse response, HttpServletRequest request,
-			@RequestParam(name = "account")String account,
-			@RequestParam(name="password")String password,
-			@RequestParam(name="email")String email,
-			@RequestParam(name="mobile")String mobile,
-			@RequestParam(name="rename")String rename) throws UnsupportedEncodingException, IOException {
-		Long userid=dbService.insert(SqlUtil.buildInsertSqlMap("User", new Object[][] {
-			{"user_name",account},
-			{"user_password",passwordEncoder.encodePassword(String.valueOf(MD5.MD5Encode(password)))},
-			{"user_mobile",mobile},
-			{"user_email",email},
-			{"user_rename",rename},
-			{"register_date",new Date()}
-		}));
-		HashMap<String, Object> res=new HashMap<String, Object>();
-		if(userid!=null) {
+			@RequestParam(name = "account") String account, @RequestParam(name = "password") String password,
+			@RequestParam(name = "email") String email, @RequestParam(name = "mobile") String mobile,
+			@RequestParam(name = "rename") String rename) throws UnsupportedEncodingException, IOException {
+		Long userid = dbService.insert(SqlUtil.buildInsertSqlMap("User",
+				new Object[][] { { "user_name", account },
+						{ "user_password", passwordEncoder.encodePassword(String.valueOf(MD5.MD5Encode(password))) },
+						{ "user_mobile", mobile }, { "user_email", email }, { "user_rename", rename },
+						{ "register_date", new Date() } }));
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		if (userid != null) {
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "注册成功");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/detail")
+	public void UserDetail(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(name="sex")boolean sex,
+			@RequestParam(name="autonym")String autonym,
+			@RequestParam(name="location")String location,
+			@RequestParam(name="idNumber")String idNumber) {
+		User user=(User) request.getSession().getAttribute("user");
+		Long id=dbService.insert(SqlUtil.buildInsertSqlMap("user_detail",
+				new Object[][] { { "user_id", user.getId() },{ "user_sex", sex },{ "user_name", autonym }, { "user_location", location }, { "user_id_number", idNumber }}));
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		if(id!=null) {
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "信息保存成功");
 		}
 		ServletUtils.writeToResponse(response, res);
 	}

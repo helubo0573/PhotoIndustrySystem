@@ -11,9 +11,10 @@
     outline: 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: rgb(255 255 255 / 14%);
     color: #ccc;
     cursor: pointer;
+    border-radius: 0.25rem;
 }
 
 .city-picker-span > .placeholder {
@@ -40,13 +41,13 @@
 }
 
 .city-picker-span > .title > span {
-    color: #333;
+    /* color: #333; */
     padding: 5px;
     border-radius: 3px;
 }
 
 .city-picker-span > .title > span:hover {
-    background-color: #f1f8ff;
+    background-color: #2125298c;
 }
 
 .city-picker-dropdown {

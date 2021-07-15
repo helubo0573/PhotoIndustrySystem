@@ -17,16 +17,19 @@ public class MainPageController {
 
 	@Resource
 	private UserDetailService userDetailService;
-	
+
 	@RequestMapping("/homepage")
-	public String MainPage(HttpServletRequest request,HttpServletResponse response) {
-		UserModel userinfo=(UserModel) request.getSession().getAttribute("user");
-		System.out.println(userinfo+"----test");
-		if(userDetailService.getDetailByUserId(userinfo.getId())!=null) {
-			return PathConstant.FrameMainPage;
-		}else {
+	public String MainPage(HttpServletRequest request, HttpServletResponse response) {
+		UserModel userinfo = (UserModel) request.getSession().getAttribute("user");
+		if (userDetailService.getDetailByUserId(userinfo.getId()) != null) {
+			if(userinfo.getCompanyId()!=null) {
+				return PathConstant.FrameMainPage;				
+			}else {
+				return PathConstant.InitCompanyPage;
+			}
+		} else {
 			return PathConstant.DetailInfoPage;
 		}
-		
+
 	}
 }

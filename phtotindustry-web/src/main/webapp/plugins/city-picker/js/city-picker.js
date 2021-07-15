@@ -32,7 +32,7 @@
     var PROVINCE = 'province';
     var CITY = 'city';
     var DISTRICT = 'district';
-
+	var Eelement
     function CityPicker(element, options) {
         this.$element = $(element);
         this.$dropdown = null;
@@ -41,6 +41,7 @@
         this.dems = [];
         this.needBlur = false;
         this.init();
+		Eelement=$(element);
     }
 
     CityPicker.prototype = {
@@ -60,11 +61,8 @@
         render: function () {
             var p = this.getPosition(),
                 placeholder = this.$element.attr('placeholder') || this.options.placeholder,
-                textspan = '<span class="city-picker-span" style="' +
-                    this.getWidthStyle(p.width) + 'height:' +
-                    p.height + 'px;line-height:' + (p.height - 1) + 'px;">' +
-                    (placeholder ? '<span class="placeholder">' + placeholder + '</span>' : '') +
-                    '<span class="title"></span><div class="arrow"></div>' + '</span>',
+                textspan = '<span class="city-picker-span" style="width:100%height:' +p.height + 'px;line-height:' + (p.height - 1) + 'px;">'+
+                    (placeholder ? '<span class="placeholder">' + placeholder + '</span>' : '') +'<span class="title"></span><div class="arrow"></div>' + '</span>',
 
                 dropdown = '<div class="city-picker-dropdown" style="left:0px;top:100%;' +
                     this.getWidthStyle(p.width, true) + '">' +
@@ -257,6 +255,7 @@
                     $select.data('item', {
                         address: $(this).attr('title'), code: $(this).data('code')
                     });
+					Eelement.attr("data-code",$(this).data('code'))
                     $(this).trigger(EVENT_CHANGE);
                     $this.feedText();
                     $this.feedVal(true);
@@ -349,11 +348,12 @@
             var text = this.getText();
             if (text) {
                 this.$textspan.find('>.placeholder').hide();
-                this.$textspan.find('>.title').html(this.getText()).show();
+                this.$textspan.find('>.title').html(text).show();
             } else {
                 this.$textspan.find('>.placeholder').text(this.getPlaceHolder()).show();
                 this.$textspan.find('>.title').html('').hide();
             }
+			//this.$element.html(this)//点击选择城市时将城市代码传递到input
         },
 
         getCode: function (count) {
@@ -401,7 +401,6 @@
             if (!$select || !$select.length) {
                 return;
             }
-
             item = $select.data('item');
 
             value = (item ? item.address : null) || options[type];
@@ -590,7 +589,7 @@
         return this;
     };
 
-    $(function () {
+   /* $(function () {
         $('[data-toggle="city-picker"]').citypicker();
-    });
+    });*/
 });

@@ -11,9 +11,9 @@ public class UnusualController {
 
 	@RequestMapping("404")
 	public String ErrorPage(HttpServletResponse response, HttpServletRequest request) {
-		
+
 		System.out.println("404");
 		return null;
-		
+
 	}
 }

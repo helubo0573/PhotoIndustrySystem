@@ -32,7 +32,6 @@ import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.service.UserService;
 import com.stone.photoindustry.core.system.security.PasswordEncoder;
 
-
 @Controller
 public class AuthController {
 
@@ -42,27 +41,27 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;// 密码加密
 	@Resource
 	private UserService userService;
-	
+
 	private Logger logger = LoggerFactory.getLogger(AuthController.class);
-	
+
 	@RequestMapping("user/login")
-	public void UserLogin(HttpServletRequest request,HttpServletResponse response,HttpSession session,
-			@RequestParam(value="username",required=true)String username,
-			@RequestParam(value="password",required=true)String password) {
+	public void UserLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			@RequestParam(value = "username", required = true) String username,
+			@RequestParam(value = "password", required = true) String password) {
 		Map<String, Object> res = new HashMap<String, Object>();
 		try {
 			Authentication authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 			Authentication authentication = authenticationManager.authenticate(authenticationToken);
 			Subject user = SecurityUtils.getSubject();
-			//获取加密后的密码字符串
+			// 获取加密后的密码字符串
 			password = passwordEncoder.encodePassword(String.valueOf(password));
 			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-			//token.setRememberMe(true);
+			// token.setRememberMe(true);
 			user.login(token);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			//还需要研究这一条
+			// 还需要研究这一条
 			session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-			UserModel userinfo=(UserModel) user.getSession().getAttribute("user");
+			UserModel userinfo = (UserModel) user.getSession().getAttribute("user");
 			session.setAttribute("SysUser", userinfo);
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "登录成功");
@@ -74,15 +73,15 @@ public class AuthController {
 			logger.error("该用户已锁定", ex);
 			res.put(Constant.RESPONSE_CODE, Constant.OTHER_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "该用户已锁定，请联系管理员！");
-		} catch (AuthenticationException ex){
+		} catch (AuthenticationException ex) {
 			logger.error("登录失败", ex);
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "用户名或密码错误");
-		} catch (ExpiredCredentialsException ex){
+		} catch (ExpiredCredentialsException ex) {
 			logger.error(ex.getMessage(), ex);
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, ex.getMessage());
-		} catch (UnknownAccountException ex){
+		} catch (UnknownAccountException ex) {
 			logger.error(ex.getMessage(), ex);
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "账号不存在请核对后重新输入");
