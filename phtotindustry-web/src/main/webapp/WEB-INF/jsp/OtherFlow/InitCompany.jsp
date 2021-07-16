@@ -43,8 +43,12 @@
 									<div id="join-div" class="companytype-div">
 										<form id="join-form" action="">
 											<div class="form-group">
-												<label>加入门店</label>
-												<input class="form-control" name="autonym" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
+												<label>查找门店</label>
+												<input class="form-control" name="autonym" placeholder="点此查找需要加入的门店" />
+											</div>
+											<div class="form-group">
+												<label>门店名称</label>
+												<input class="form-control" name="autonym" placeholder="点此查找需要加入的门店" />
 											</div>
 											<div class="form-group">
 												<label>所在地</label>
@@ -53,29 +57,37 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label>身份证号</label>
+												<label>详细地址</label>
 												<input type="text" class="form-control" name="idNumber" placeholder="请输入你的邮箱地址" />
 											</div>
 											<div class="btn-group mt-3 w-100">
-												<button type="button" class="btn btn-light" onclick="sumit()">保存</button>
+												<button type="button" class="btn btn-light" onclick="sumit()">提交加入申请</button>
 											</div>
 										</form>
 									</div>
 									<div id="create-div" class="companytype-div" style="display: none;" >
 										<form id="create-form" action="">
 											<div class="form-group">
-												<label>建立门店</label>
-												<input class="form-control" name="autonym" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
+												<label>门店名称</label>
+												<input class="form-control" name="companyName" placeholder="填写你的门店名称" />
+											</div>
+											<div class="form-group">
+												<label>营业执照编号</label>
+												<input class="form-control" name="companyId" placeholder="填写营业执照上的统一社会信用代码" />
 											</div>
 											<div class="form-group">
 												<label>所在地</label>
 												<div style="position: relative;">
-													<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="detail-address">
+													<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="companyLocation">
 												</div>
 											</div>
 											<div class="form-group">
-												<label>身份证号</label>
-												<input type="text" class="form-control" name="idNumber" placeholder="请输入你的邮箱地址" />
+												<label>详细地址</label>
+												<input type="text" class="form-control" name="detailAddress" id="detailAddress" placeholder="请填写门店详细地址" />
+											</div>
+											<div class="form-group">
+												<label>门店员工人数</label>
+												<input type="text" class="form-control" name="numberEmployee" placeholder="请输入门店的大概员工数" />
 											</div>
 											<div class="btn-group mt-3 w-100">
 												<button type="button" class="btn btn-light" onclick="sumit()">保存</button>
@@ -99,6 +111,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=202107149"></script>
 <script type="text/javascript">
+$(function(){
+	$("#companyLocation").citypicker();
+})
 function changetype(type){
 	$(".companytype-div").hide();
 	if(type==0)

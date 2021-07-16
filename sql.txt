@@ -13,3 +13,21 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 AUTO_INCREMENT=1
 ROW_FORMAT=COMPACT
 ;
+
+CREATE TABLE `company_info` (
+`id`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`company_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '门店名称' ,
+`company_id`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构统一社会信用代码' ,
+`originator_id`  bigint(20) NULL DEFAULT NULL COMMENT '创始人(法人)用户id' ,
+`created_date`  datetime NULL DEFAULT NULL COMMENT '创建日期(系统内)' ,
+`company_location`  varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '在所地' ,
+`detail_address`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详细地址' ,
+`number_employee`  int(11) NULL DEFAULT NULL COMMENT '员工人数' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='门店(公司)信息表'
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
