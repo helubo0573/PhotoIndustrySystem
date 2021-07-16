@@ -35,11 +35,11 @@
 											<label>性别</label>
 											<div class="custom-control custom-radio custom-control-inline">
 												<input class="form-check-input" type="radio" name="sex" id="girl" value="0" checked> 
-												<label class="form-check-label" for="exampleRadios1">女</label>
+												<label class="form-check-label" for="girl">女</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline">
 												<input class="form-check-input" type="radio" name="sex" id="boy" value="1">
-												<label class="form-check-label" for="exampleRadios1">男</label>
+												<label class="form-check-label" for="boy">男</label>
 											</div>
 										</div>
 										<div class="form-group">
