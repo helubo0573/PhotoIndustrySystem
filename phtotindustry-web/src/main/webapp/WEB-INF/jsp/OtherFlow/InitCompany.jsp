@@ -55,27 +55,21 @@
 												<label>门店信息</label>
 												<table class="table table-bordered table-dark">
 													<tr>
-														<th width="88px">门店名称</th>
-														<td>
-															<div class="form-group">
-																<label id="companyNameLab"></label>
-															</div>
+														<th width="88px"><label>门店名称</label></th>
+														<td width="300px">
+															<label id="companyNameLab"></label>
 														</td>
 													</tr>
 													<tr>
-														<th>所在地</th>
+														<th><label>所在地</label></th>
 														<td>
-															<div  class="form-group">
-																<label id="companyLocationLab"></label>
-															</div>
+															<label id="companyLocationLab"></label>
 														</td>
 													</tr>
 													<tr>
-														<th>详细地址</th>
+														<th><label>详细地址</label></th>
 														<td>
-															<div class="form-group">
-																<label id="companyAddressLab"></label>
-															</div>
+															<label id="companyAddressLab"></label>
 														</td>
 													</tr>
 												</table>
@@ -154,37 +148,33 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="companyList" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal fade" id="exampleModal9" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
-				<div class="modal-content bg-seccuse border-0">
-					<div class="modal-header border-bottom-0">
-						<h5 class="modal-title">找到多个门店,请点击选择</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">	
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<table>
-							<thead>
-								<tr>
-									<th>名称</th>
-									<th>地址</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-							</tbody>
-						</table>
-					</div>
+	<div class="modal fade" id="companyListDiv" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" style="width: 400px;">
+			<div class="modal-content bg-seccuse border-0">
+				<div class="modal-header border-bottom-0">
+					<h5 class="modal-title">找到多个门店,请点击选择</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">	
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover table-dark" id="companyListTable">
+						<thead>
+							<tr>
+								<th>名称</th>
+								<th>地址</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js?d=202107171"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=2021071410"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js?d=202107173"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=2021071411"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -233,6 +223,7 @@ function searchCompany(){
 	$.ajax({
 		contenType:'application/json',
 		Type:'POST',
+		async:false,
 		dataType:'json',
 		data:"companyname="+cname+"&companylocation="+clocation,
 		url:"../company/searchcompany.do",
@@ -245,7 +236,10 @@ function searchCompany(){
 					if(data.size==1){
 						setCompanyinfo(data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
 					}else{
-						
+						$("#companyListDiv").modal('show')
+						$.each(data.data,function(index,company){
+							$("#companyListTable tbody").append("<tr onclick='setCompanysInfo(\""+this.companyName+"\",\""+this.companyLocation+"\",\""+this.detailAddress+"\")'><td><lable>"+this.companyName+"</lable></td><td><lable>"+this.detailAddress+"</lable></td></tr>")
+						})
 					}
 				
 				}
@@ -255,14 +249,19 @@ function searchCompany(){
 		}
 	})
 }
+function setCompanysInfo(cName,cLocation,cAddress){
+	$("#companyListDiv").modal('hide');
+	setCompanyinfo(cName,cLocation,cAddress);
+	$("#companyListTable tbody").empty();
+}
 function setCompanyinfo(cName,cLocation,cAddress){
 	$("#companyNameLab").text(cName)
-	$("#companyLocationLab").text(cLocation)
-	outputDetailInfo(cLocation);
+	$("#companyLocationLab").text(outputDetailInfo(cLocation));
 	$("#companyAddressLab").text(cAddress)
 }
 $("#searchCompany").on('show.bs.modal', function () {
 	$("#s-companyLocation").citypicker();
 })
+
 </script>
 </html>

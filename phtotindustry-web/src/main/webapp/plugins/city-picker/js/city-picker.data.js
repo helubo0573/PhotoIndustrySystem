@@ -4065,7 +4065,27 @@
 });
 
 function outputDetailInfo(code){
+	var addressinfo="";
 	var province=code.substring(0,2)+"0000";
 	var city=code.substring(0,4)+"00";
-	alert(ChineseDistricts[province]+"省"+ChineseDistricts[city])
+	$.each(ChineseDistricts[86], function(index,address){
+		for (var i = 0; i < address.length; i++){
+			if (address[i].code === province){
+				addressinfo+=address[i].address+"/";
+			}
+		}
+	})
+	$.each(ChineseDistricts[province], function(index,address){
+			console.log(index)
+			if (index === city){
+				addressinfo+=address+"/";
+			}
+		
+	})
+	$.each(ChineseDistricts[city], function(index,address){
+			if (index === code){
+				addressinfo+=address;
+			}
+	})
+	return addressinfo;
 }
