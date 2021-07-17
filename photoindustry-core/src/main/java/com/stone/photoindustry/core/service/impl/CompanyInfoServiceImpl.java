@@ -1,5 +1,8 @@
 package com.stone.photoindustry.core.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -32,6 +35,16 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo, Long> i
 	@Override
 	public BaseMapper<CompanyInfo, Long> getMapper() {
 		return companyInfoMapper;
+	}
+
+	@Override
+	public boolean checkCompanyNameExist(String cname, String clocation) {
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("companyName", cname);
+		param.put("companyLocation", clocation);
+		int num=companyInfoMapper.checkCompanyName(param);
+		System.out.println("testcom");
+		return num>0?true:false;
 	}
 	
 }

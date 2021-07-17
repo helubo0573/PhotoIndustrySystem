@@ -49,6 +49,19 @@
         </trim>
     </sql>
     
+    <sql id="searchEXT">
+    	<trim prefix="where" prefixOverrides="and|or">
+    		<if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=BIGINT}
+            </if>
+    		<if test="companyName != null and companyName != '' ">
+                and company_name like CONCAT ("%",#{companyName,jdbcType=VARCHAR},"%")
+            </if>
+            <if test="companyLocation != null and companyLocation != '' ">
+                and company_location = #{companyLocation,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
     
     <insert id="save" parameterType="com.stone.photoindustry.core.domain.CompanyInfo">
         insert into company_info(company_name,company_id,originator_id,created_date,company_location,detail_address,number_employee)values(#{companyName,jdbcType=VARCHAR},#{companyId,jdbcType=VARCHAR},#{originatorId,jdbcType=BIGINT},#{createdDate,jdbcType=TIMESTAMP},#{companyLocation,jdbcType=VARCHAR},#{detailAddress,jdbcType=VARCHAR},#{numberEmployee,jdbcType=INTEGER})
@@ -118,4 +131,16 @@
         <include refid="searchBy"/>
     </select>
     
+    <select id="checkCompanyName"  resultType="java.lang.Integer"  parameterType="java.util.HashMap">
+    	select count(id)
+    	from company_info
+    	<include refid="searchEXT"/>
+    </select>
+    
+    <select id="ListMoreSelective"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    	select
+        <include refid="Base_Column_List" />
+        from company_info
+        <include refid="searchEXT"/>
+    </select>
 </mapper>

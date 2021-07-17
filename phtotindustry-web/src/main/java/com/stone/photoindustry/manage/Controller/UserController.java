@@ -59,13 +59,16 @@ public class UserController {
 			@RequestParam(name="autonym")String autonym,
 			@RequestParam(name="location")String location,
 			@RequestParam(name="idNumber")String idNumber) {
-		User user=(User) request.getSession().getAttribute("user");
-		Long id=dbService.insert(SqlUtil.buildInsertSqlMap("user_detail",
-				new Object[][] { { "user_id", user.getId() },{ "user_sex", sex },{ "user_name", autonym }, { "user_location", location }, { "user_id_number", idNumber }}));
 		HashMap<String, Object> res = new HashMap<String, Object>();
-		if(id!=null) {
+		try {
+			User user=(User) request.getSession().getAttribute("user");
+			dbService.insert(SqlUtil.buildInsertSqlMap("user_detail",
+					new Object[][] { { "user_id", user.getId() },{ "user_sex", sex },{ "user_name", autonym }, { "user_location", location }, { "user_id_number", idNumber }}));
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "信息保存成功");
+		} catch (Exception e) {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "信息保存失败");
 		}
 		ServletUtils.writeToResponse(response, res);
 	}

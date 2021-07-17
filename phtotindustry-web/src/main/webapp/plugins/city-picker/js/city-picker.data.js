@@ -4062,5 +4062,10 @@
     }
 
     return ChineseDistricts;
-
 });
+
+function outputDetailInfo(code){
+	var province=code.substring(0,2)+"0000";
+	var city=code.substring(0,4)+"00";
+	alert(ChineseDistricts[province]+"省"+ChineseDistricts[city])
+}

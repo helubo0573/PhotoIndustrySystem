@@ -12,4 +12,5 @@ import com.stone.photoindustry.core.domain.CompanyInfo;
  */
 public interface CompanyInfoService extends BaseService<CompanyInfo, Long>{
 
+	boolean checkCompanyNameExist(String cname,String clocation);
 }

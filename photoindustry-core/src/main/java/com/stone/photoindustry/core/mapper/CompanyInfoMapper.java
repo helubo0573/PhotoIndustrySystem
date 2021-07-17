@@ -1,5 +1,8 @@
 package com.stone.photoindustry.core.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.mapper.RDBatisDao;
 import com.stone.photoindustry.core.domain.CompanyInfo;
@@ -14,6 +17,7 @@ import com.stone.photoindustry.core.domain.CompanyInfo;
 @RDBatisDao
 public interface CompanyInfoMapper extends BaseMapper<CompanyInfo, Long> {
 
-    
+    int checkCompanyName(HashMap<String, Object> param);
 
+    List<CompanyInfo> ListMoreSelective(HashMap<String, Object> param);
 }

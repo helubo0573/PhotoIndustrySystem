@@ -186,7 +186,6 @@
                 return 'width:' + (dropdown ? Math.max(320, w) : w) + 'px;';
             }
         },
-
         bind: function () {
             var $this = this;
 
@@ -588,7 +587,8 @@
         $.fn.citypicker = CityPicker.other;
         return this;
     };
-
+	
+	
    /* $(function () {
         $('[data-toggle="city-picker"]').citypicker();
     });*/

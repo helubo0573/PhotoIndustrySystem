@@ -42,23 +42,43 @@
 									</div>
 									<div id="join-div" class="companytype-div">
 										<form id="join-form" action="">
+											
 											<div class="form-group">
-												<label>查找门店</label>
-												<input class="form-control" name="autonym" placeholder="点此查找需要加入的门店" />
-											</div>
-											<div class="form-group">
-												<label>门店名称</label>
-												<input class="form-control" name="autonym" placeholder="点此查找需要加入的门店" />
-											</div>
-											<div class="form-group">
-												<label>所在地</label>
-												<div style="position: relative;">
-													<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="detail-address">
+												<div class="class="trigger Free">
+													<button type="button" class="btn btn-light radius-30 px-5" data-toggle="modal" data-target="#searchCompany">
+														<i class="lni lni-magnifier" style="cursor: pointer;">查找门店</i>
+													</button>
 												</div>
 											</div>
+											
 											<div class="form-group">
-												<label>详细地址</label>
-												<input type="text" class="form-control" name="idNumber" placeholder="请输入你的邮箱地址" />
+												<label>门店信息</label>
+												<table class="table table-bordered table-dark">
+													<tr>
+														<th width="88px">门店名称</th>
+														<td>
+															<div class="form-group">
+																<label id="companyNameLab"></label>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<th>所在地</th>
+														<td>
+															<div  class="form-group">
+																<label id="companyLocationLab"></label>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<th>详细地址</th>
+														<td>
+															<div class="form-group">
+																<label id="companyAddressLab"></label>
+															</div>
+														</td>
+													</tr>
+												</table>
 											</div>
 											<div class="btn-group mt-3 w-100">
 												<button type="button" class="btn btn-light" onclick="sumit()">提交加入申请</button>
@@ -78,7 +98,7 @@
 											<div class="form-group">
 												<label>所在地</label>
 												<div style="position: relative;">
-													<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="companyLocation">
+													<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="createCLocation">
 												</div>
 											</div>
 											<div class="form-group">
@@ -87,10 +107,10 @@
 											</div>
 											<div class="form-group">
 												<label>门店员工人数</label>
-												<input type="text" class="form-control" name="numberEmployee" placeholder="请输入门店的大概员工数" />
+												<input class="form-control" name="numberEmployee" type="number" placeholder="请输入门店的大概员工数" />
 											</div>
 											<div class="btn-group mt-3 w-100">
-												<button type="button" class="btn btn-light" onclick="sumit()">保存</button>
+												<button type="button" class="btn btn-light" onclick="createCompany()">保存</button>
 											</div>
 										</form>
 									</div>
@@ -106,21 +126,143 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="searchCompany" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" style="width: 400px">
+			<div class="modal-content radius-30">
+				<div class="modal-header border-bottom-0">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="height: 400px;">
+					<h3 class="text-center">输入查询信息</h3>
+					<div class="form-group">
+						<label>门店名称</label>
+						<input type="text" class="form-control" id="s-companyname" />
+					</div>
+					<div class="form-group" style="height: 200px">
+						<label>门店所在地</label>
+						<div style="position: relative;">
+							<input class="form-control" readonly data-code type="text" value="" placeholder="请点击选择所在地区" id="s-companyLocation">
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="button" class="btn btn-light radius-30 btn-block" onclick="searchCompany()">查询</button>
+					</div>
+					<hr/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="companyList" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" id="exampleModal9" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-content bg-seccuse border-0">
+					<div class="modal-header border-bottom-0">
+						<h5 class="modal-title">找到多个门店,请点击选择</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">	
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table>
+							<thead>
+								<tr>
+									<th>名称</th>
+									<th>地址</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=202107149"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js?d=202107171"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=2021071410"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#companyLocation").citypicker();
+	$("#s-companyLocation").citypicker();
 })
 function changetype(type){
 	$(".companytype-div").hide();
-	if(type==0)
+	if(type==0){
 		$("#join-div").show();
-	else
+	}else{
 		$("#create-div").show();
-	
+		$("#createCLocation").citypicker();
+	}
 }
+function createCompany(){
+	if(checkCompanyInfo()){
+		$.ajax({
+			contenType:'application/json',
+			Type:'POST',
+			dataType:'json',
+			data:$("#create-form").serialize()+"&location="+$("#createCLocation").attr("data-code"),
+			url:"../company/createcompany.do",
+			success:function(data){
+				alert(data.msg)
+				if(data.code==200){
+					window.location="homepage.do";
+				}
+			}
+		})
+	}
+}
+function checkCompanyInfo(){
+	
+	return true;
+}
+function searchCompany(){
+	var cname=$("#s-companyname").val().trim();
+	var clocation=$("#s-companyLocation").attr("data-code").trim();
+	if(cname==""){
+		alert("请填写门店名称");
+		return false;
+	}
+	if(clocation==""){
+		alert("请选择门店所在地")
+	}
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		data:"companyname="+cname+"&companylocation="+clocation,
+		url:"../company/searchcompany.do",
+		success:function(data){
+			if(data.msg==200){
+				if(data.size>5){
+						alert("搜索到的门店过多，请尝试填写更详细的门店名称以缩小搜索范围")
+				}else{
+					$('#searchCompany').modal('hide')
+					if(data.size==1){
+						setCompanyinfo(data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
+					}else{
+						
+					}
+				
+				}
+					
+				
+			}
+		}
+	})
+}
+function setCompanyinfo(cName,cLocation,cAddress){
+	$("#companyNameLab").text(cName)
+	$("#companyLocationLab").text(cLocation)
+	outputDetailInfo(cLocation);
+	$("#companyAddressLab").text(cAddress)
+}
+$("#searchCompany").on('show.bs.modal', function () {
+	$("#s-companyLocation").citypicker();
+})
 </script>
 </html>
