@@ -1,5 +1,7 @@
 package com.stone.photoindustry.core.service;
 
+import java.util.HashMap;
+
 import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.UserModel;
@@ -21,4 +23,5 @@ public interface UserService extends BaseService<User, Long>{
 
 	UserModel getUserModelByUserName(String userName);
 
+	void joinCompany(Long userid,Long companyId);
 }

@@ -61,5 +61,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void joinCompany(Long userid,Long companyId) {
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("id", userid);
+		param.put("companyId", companyId);
+		userMapper.updateSelective(param);
+		
+	}
 	
 }
