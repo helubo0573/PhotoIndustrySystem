@@ -50,7 +50,7 @@
                 and use_rename = #{useRename,jdbcType=VARCHAR}
             </if>
             <if test="companyId != null and companyId != '' ">
-                and company_id = #{companyId,jdbcType=VARCHAR}
+                and company_id = #{companyId,jdbcType=BIGINT}
             </if>
             <if test="registerDate != null">
                 and register_date = #{registerDate,jdbcType=TIMESTAMP}
@@ -77,7 +77,7 @@
             user_mobile = #{userMobile,jdbcType=VARCHAR},
             user_email = #{userEmail,jdbcType=VARCHAR},
             use_rename = #{useRename,jdbcType=VARCHAR},
-            company_id = #{companyId,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=BIGINT},
             register_date = #{registerDate,jdbcType=TIMESTAMP},
             login_time = #{loginTime,jdbcType=TIMESTAMP},
             status = #{status,jdbcType=INTEGER}
@@ -104,7 +104,7 @@
                 use_rename = #{useRename,jdbcType=VARCHAR},                
             </if>
             <if test="companyId != null and companyId != '' ">        
-                company_id = #{companyId,jdbcType=VARCHAR},                
+                company_id = #{companyId,jdbcType=BIGINT},                
             </if>
             <if test="registerDate != null">
                 register_date = #{registerDate,jdbcType=TIMESTAMP},                

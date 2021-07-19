@@ -96,9 +96,9 @@ function register(){
 			data:$("#registerinfo").serialize(),
 			url:"user/register.do",
 			success:function(data){
+				alert(data.msg);
 				if(data.code==200){
-					alert("注册成功");
-					$("#registerinfo input").val("");
+					window.location="main/homepage.do";
 				}
 			}
 		})

@@ -42,7 +42,7 @@
 									</div>
 									<div id="join-div" class="companytype-div">
 										<form id="join-form" action="">
-											
+											<input type="hidden" name="joinCompanyId" id="joinCompanyId">
 											<div class="form-group">
 												<div class="class="trigger Free">
 													<button type="button" class="btn btn-light radius-30 px-5" data-toggle="modal" data-target="#searchCompany">
@@ -50,7 +50,6 @@
 													</button>
 												</div>
 											</div>
-											
 											<div class="form-group">
 												<label>门店信息</label>
 												<table class="table table-bordered table-dark">
@@ -75,7 +74,7 @@
 												</table>
 											</div>
 											<div class="btn-group mt-3 w-100">
-												<button type="button" class="btn btn-light" onclick="sumit()">提交加入申请</button>
+												<button type="button" class="btn btn-light" onclick="joinCompany()">提交加入申请</button>
 											</div>
 										</form>
 									</div>
@@ -176,6 +175,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.data.js?d=202107173"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/city-picker/js/city-picker.js?d=2021071411"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/bootstrapConfirm.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#s-companyLocation").citypicker();
@@ -206,11 +206,26 @@ function createCompany(){
 		})
 	}
 }
+function joinCompany(){
+	$.ajax({
+		contenType:'application/json',
+		Type:'POST',
+		dataType:'json',
+		data:$("#join-form").serialize(),
+		url:"../company/joincompany.do",
+		success:function(data){
+			alert(data.msg)
+			if(data.code==200){
+				window.location="homepage.do";
+			}
+		}
+	})
+}
 function checkCompanyInfo(){
 	
 	return true;
 }
-function searchCompany(){
+function checkCompanys(){
 	var cname=$("#s-companyname").val().trim();
 	var clocation=$("#s-companyLocation").attr("data-code").trim();
 	if(cname==""){
@@ -220,41 +235,49 @@ function searchCompany(){
 	if(clocation==""){
 		alert("请选择门店所在地")
 	}
-	$.ajax({
-		contenType:'application/json',
-		Type:'POST',
-		async:false,
-		dataType:'json',
-		data:"companyname="+cname+"&companylocation="+clocation,
-		url:"../company/searchcompany.do",
-		success:function(data){
-			if(data.msg==200){
-				if(data.size>5){
-						alert("搜索到的门店过多，请尝试填写更详细的门店名称以缩小搜索范围")
-				}else{
-					$('#searchCompany').modal('hide')
-					if(data.size==1){
-						setCompanyinfo(data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
-					}else{
-						$("#companyListDiv").modal('show')
-						$.each(data.data,function(index,company){
-							$("#companyListTable tbody").append("<tr onclick='setCompanysInfo(\""+this.companyName+"\",\""+this.companyLocation+"\",\""+this.detailAddress+"\")'><td><lable>"+this.companyName+"</lable></td><td><lable>"+this.detailAddress+"</lable></td></tr>")
-						})
-					}
-				
-				}
-					
-				
-			}
-		}
-	})
+	return true;	
 }
-function setCompanysInfo(cName,cLocation,cAddress){
+function searchCompany(){
+	if(checkCompanys()){
+		$.ajax({
+			contenType:'application/json',
+			Type:'POST',
+			async:false,
+			dataType:'json',
+			data:"companyname="+$("#s-companyname").val().trim()+"&companylocation="+$("#s-companyLocation").attr("data-code").trim(),
+			url:"../company/searchcompany.do",
+			success:function(data){
+				if(data.msg==200){
+					if(data.size==0){
+						alert("未搜索到相关门店！")
+					}else{
+						if(data.size>5){
+								alert("搜索到的门店过多，请尝试填写更详细的门店名称以缩小搜索范围")
+						}else{
+							$('#searchCompany').modal('hide')
+							if(data.size==1){
+								setCompanyinfo(data.data[0].id,data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
+							}else{
+								$("#companyListDiv").modal('show')
+								$.each(data.data,function(index,company){
+									$("#companyListTable tbody").append("<tr onclick='setCompanysInfo(\""+this.id+"\",\""+this.companyName+"\",\""+this.companyLocation+"\",\""+this.detailAddress+"\")'><td><lable>"+this.companyName+"</lable></td><td><lable>"+this.detailAddress+"</lable></td></tr>")
+								})
+							}
+						}
+					}
+					
+				}
+			}
+		})
+	}
+}
+function setCompanysInfo(companyid,cName,cLocation,cAddress){
 	$("#companyListDiv").modal('hide');
-	setCompanyinfo(cName,cLocation,cAddress);
+	setCompanyinfo(companyid,cName,cLocation,cAddress);
 	$("#companyListTable tbody").empty();
 }
-function setCompanyinfo(cName,cLocation,cAddress){
+function setCompanyinfo(companyid,cName,cLocation,cAddress){
+	$("#joinCompanyId").val(companyid)
 	$("#companyNameLab").text(cName)
 	$("#companyLocationLab").text(outputDetailInfo(cLocation));
 	$("#companyAddressLab").text(cAddress)

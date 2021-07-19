@@ -20,6 +20,7 @@ import com.stone.photoindustry.core.domain.CompanyInfo;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.mapper.CompanyInfoMapper;
 import com.stone.photoindustry.core.service.CompanyInfoService;
+import com.stone.photoindustry.core.service.UserService;
 
 @Controller
 @RequestMapping("company")
@@ -27,7 +28,8 @@ public class CompanyController {
 
 	@Resource
 	protected DBService dbService;
-	
+	@Resource
+	private UserService userService;
 	@Resource
 	private CompanyInfoService companyInfoService;
 	@Resource
@@ -42,10 +44,8 @@ public class CompanyController {
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		try {
 			if(!companyInfoService.checkCompanyNameExist(companyName, companyLocation)) {
-				System.out.println("test");
 				User user=(User) request.getSession().getAttribute("user");
-				System.out.println("test1");
-				dbService.insert(SqlUtil.buildInsertSqlMap("company_info",
+				Long id=dbService.insert(SqlUtil.buildInsertSqlMap("company_info",
 						new Object[][] { 
 					{ "company_name", companyName },
 					{ "company_id", companyId },
@@ -55,6 +55,7 @@ public class CompanyController {
 					{ "detail_address", detailAddress },
 					{"number_employee", numberEmployee }
 				}));
+				userService.joinCompany(user.getId(), id);
 				res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 				res.put(Constant.RESPONSE_CODE_MSG, "，恭喜！创建门店成功");
 			}else {
@@ -65,7 +66,22 @@ public class CompanyController {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "很遗憾！创建门店失败");
 		}
-		
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/joincompany")
+	public void joinCompany(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(name="joinCompanyId")Long companyId) {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		try {
+			User user=(User) request.getSession().getAttribute("user");
+			userService.applyJoinCompany(user.getId(), companyId);
+			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "，提交加入门店申请成功，请等待通过");
+		} catch (Exception e) {
+			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "申请失败，如有疑问请联系客服");
+		}
 		ServletUtils.writeToResponse(response, res);
 	}
 	@RequestMapping("/searchcompany")
