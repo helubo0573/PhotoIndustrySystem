@@ -75,7 +75,7 @@ public class CompanyController {
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		try {
 			User user=(User) request.getSession().getAttribute("user");
-			userService.joinCompany(user.getId(), companyId);
+			userService.applyJoinCompany(user.getId(), companyId);
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "，提交加入门店申请成功，请等待通过");
 		} catch (Exception e) {

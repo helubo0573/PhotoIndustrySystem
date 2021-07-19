@@ -225,7 +225,7 @@ function checkCompanyInfo(){
 	
 	return true;
 }
-function searchCompany(){
+function checkCompanys(){
 	var cname=$("#s-companyname").val().trim();
 	var clocation=$("#s-companyLocation").attr("data-code").trim();
 	if(cname==""){
@@ -235,31 +235,41 @@ function searchCompany(){
 	if(clocation==""){
 		alert("请选择门店所在地")
 	}
-	$.ajax({
-		contenType:'application/json',
-		Type:'POST',
-		async:false,
-		dataType:'json',
-		data:"companyname="+cname+"&companylocation="+clocation,
-		url:"../company/searchcompany.do",
-		success:function(data){
-			if(data.msg==200){
-				if(data.size>5){
-						alert("搜索到的门店过多，请尝试填写更详细的门店名称以缩小搜索范围")
-				}else{
-					$('#searchCompany').modal('hide')
-					if(data.size==1){
-						setCompanyinfo(data.data[0].id,data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
+	return true;	
+}
+function searchCompany(){
+	if(checkCompanys()){
+		$.ajax({
+			contenType:'application/json',
+			Type:'POST',
+			async:false,
+			dataType:'json',
+			data:"companyname="+$("#s-companyname").val().trim()+"&companylocation="+$("#s-companyLocation").attr("data-code").trim(),
+			url:"../company/searchcompany.do",
+			success:function(data){
+				if(data.msg==200){
+					if(data.size==0){
+						alert("未搜索到相关门店！")
 					}else{
-						$("#companyListDiv").modal('show')
-						$.each(data.data,function(index,company){
-							$("#companyListTable tbody").append("<tr onclick='setCompanysInfo(\""+this.id+"\",\""+this.companyName+"\",\""+this.companyLocation+"\",\""+this.detailAddress+"\")'><td><lable>"+this.companyName+"</lable></td><td><lable>"+this.detailAddress+"</lable></td></tr>")
-						})
+						if(data.size>5){
+								alert("搜索到的门店过多，请尝试填写更详细的门店名称以缩小搜索范围")
+						}else{
+							$('#searchCompany').modal('hide')
+							if(data.size==1){
+								setCompanyinfo(data.data[0].id,data.data[0].companyName,data.data[0].companyLocation,data.data[0].detailAddress)
+							}else{
+								$("#companyListDiv").modal('show')
+								$.each(data.data,function(index,company){
+									$("#companyListTable tbody").append("<tr onclick='setCompanysInfo(\""+this.id+"\",\""+this.companyName+"\",\""+this.companyLocation+"\",\""+this.detailAddress+"\")'><td><lable>"+this.companyName+"</lable></td><td><lable>"+this.detailAddress+"</lable></td></tr>")
+								})
+							}
+						}
 					}
+					
 				}
 			}
-		}
-	})
+		})
+	}
 }
 function setCompanysInfo(companyid,cName,cLocation,cAddress){
 	$("#companyListDiv").modal('hide');

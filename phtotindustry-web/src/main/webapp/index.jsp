@@ -101,8 +101,8 @@ function login(){
 		url:"user/login.do",
 		data:"username="+username+"&password="+hex_md5(password),
 		success:function(data){
+			alert(data.msg)
 			if(data.code==200){
-				alert(data.msg)
 				window.location="main/homepage.do";
 			}
 		},

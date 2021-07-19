@@ -23,5 +23,8 @@ public interface UserService extends BaseService<User, Long>{
 
 	UserModel getUserModelByUserName(String userName);
 
+	void applyJoinCompany(Long userid,Long companyId);
+	
 	void joinCompany(Long userid,Long companyId);
+	
 }

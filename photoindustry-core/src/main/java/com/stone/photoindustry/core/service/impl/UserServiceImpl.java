@@ -1,5 +1,6 @@
 package com.stone.photoindustry.core.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
+import com.stone.photoindustry.core.common.util.DBService;
+import com.stone.photoindustry.core.common.util.MD5;
+import com.stone.photoindustry.core.common.util.SqlUtil;
 import com.stone.photoindustry.core.mapper.UserMapper;
 import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.domain.User;
@@ -28,7 +32,11 @@ import com.stone.photoindustry.core.service.UserService;
 public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService {
 	
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-   
+    
+    
+    @Resource
+	protected DBService dbService;
+    
     @Resource
     private UserMapper userMapper;
 
@@ -60,6 +68,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long> implements User
 	public void editUserPassWord(User op) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void applyJoinCompany(Long userid, Long companyId) {
+		dbService.insert(SqlUtil.buildInsertSqlMap("company_apply_join",
+			new Object[][] { { "company_id", companyId },
+					{ "user_id", userid },
+					{ "apply_date",  new Date() }, 
+					{ "apply_status", 0 } }));
 	}
 
 	@Override
