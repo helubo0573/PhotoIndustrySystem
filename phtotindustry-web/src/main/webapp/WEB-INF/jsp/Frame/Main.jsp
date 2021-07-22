@@ -28,7 +28,7 @@
 					<img src="../images/logo-icon.png" class="logo-icon-2" alt="" />
 				</div>
 				<div>
-					<h4 class="logo-text">焱鑫有色</h4>
+					<h4 class="logo-text">焱鑫有色焱鑫有色焱鑫有</h4>
 				</div>
 				<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
 				</a>
