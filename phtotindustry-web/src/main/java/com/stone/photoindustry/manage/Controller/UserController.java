@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,17 +37,18 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;// 密码加密
 
 	@RequestMapping("/register")
-	public void RegisterUser(HttpServletResponse response, HttpServletRequest request,
-			@RequestParam(name = "account") String account, @RequestParam(name = "password") String password,
+	public void RegisterUser(HttpServletResponse response, HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "account") String account, @RequestParam(name = "repassword") String password,
 			@RequestParam(name = "email") String email, @RequestParam(name = "mobile") String mobile,
 			@RequestParam(name = "rename") String rename) throws UnsupportedEncodingException, IOException {
 		Long userid = dbService.insert(SqlUtil.buildInsertSqlMap("User",
 				new Object[][] { { "user_name", account },
-						{ "user_password", passwordEncoder.encodePassword(String.valueOf(MD5.MD5Encode(password))) },
+						{ "user_password", passwordEncoder.encodePassword(String.valueOf(password)) },
 						{ "user_mobile", mobile }, { "user_email", email }, { "user_rename", rename },
 						{ "register_date", new Date() } }));
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		if (userid != null) {
+			userservice.Auth(account, password, request, response, session);
 			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "注册成功");
 		}

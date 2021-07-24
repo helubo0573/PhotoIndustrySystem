@@ -82,7 +82,7 @@ public class CompanyController {
 			Long applyId=companyApplyJoinService.applyJoinCompany(user.getId(), companyId);
 			if(applyId!=null) {
 				res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
-				res.put(Constant.RESPONSE_CODE_MSG, "，提交加入门店申请成功，请等待通过");
+				res.put(Constant.RESPONSE_CODE_MSG, "提交加入门店申请成功，请等待通过");
 			}else {
 				res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 				res.put(Constant.RESPONSE_CODE_MSG, "申请失败，如有疑问请联系客服");

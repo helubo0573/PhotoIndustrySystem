@@ -36,7 +36,7 @@
 										</div>
 										<div class="form-group">
 											<label>密码</label>
-											<input class="form-control" type="password" name="password" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
+											<input class="form-control" type="password" id="password" placeholder="设置8-12位密码，必须由大小写英文字母及数字组成" />
 										</div>
 										<div class="form-group">
 											<label>重复密码</label>
@@ -86,6 +86,7 @@
 <script type="text/javascript" src="./plugins/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="./plugins/city-picker/js/city-picker.data.js"></script>
 <script type="text/javascript" src="./plugins/city-picker/js/city-picker.js"></script>
+<script src="./plugins/encrypt.js"></script>
 <script type="text/javascript">
 function register(){
 	if(checkdata()){
@@ -93,7 +94,7 @@ function register(){
 			contenType:'application/json',
 			Type:'POST',
 			dataType:'json',
-			data:$("#registerinfo").serialize(),
+			data:$("#registerinfo").serialize()+"&repassword="+hex_md5($("#password").val().trim()),
 			url:"user/register.do",
 			success:function(data){
 				alert(data.msg);
