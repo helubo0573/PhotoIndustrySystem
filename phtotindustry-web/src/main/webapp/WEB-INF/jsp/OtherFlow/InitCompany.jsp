@@ -242,7 +242,6 @@ function searchCompany(){
 		$.ajax({
 			contenType:'application/json',
 			Type:'POST',
-			async:false,
 			dataType:'json',
 			data:"companyname="+$("#s-companyname").val().trim()+"&companylocation="+$("#s-companyLocation").attr("data-code").trim(),
 			url:"../company/searchcompany.do",
