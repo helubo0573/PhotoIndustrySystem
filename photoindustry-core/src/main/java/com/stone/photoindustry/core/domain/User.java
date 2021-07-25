@@ -33,7 +33,7 @@ import java.util.Date;
     private String userRename;
     
     /*** 所属公司ID*/
-    private String companyId;
+    private Long companyId;
     /*** */
     private Date registerDate;
 
@@ -188,11 +188,11 @@ import java.util.Date;
         this.status = status;
     }
 
-	public String getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(String companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 

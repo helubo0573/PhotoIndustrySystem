@@ -82,7 +82,7 @@
 										<form id="create-form" action="">
 											<div class="form-group">
 												<label>门店名称</label>
-												<input class="form-control" name="companyName" placeholder="填写你的门店名称" />
+												<input class="form-control" name="companyName" placeholder="填写你的门店名称" maxlength="12"/>
 											</div>
 											<div class="form-group">
 												<label>营业执照编号</label>

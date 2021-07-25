@@ -19,6 +19,7 @@ import com.stone.photoindustry.core.common.util.SqlUtil;
 import com.stone.photoindustry.core.domain.CompanyInfo;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.mapper.CompanyInfoMapper;
+import com.stone.photoindustry.core.service.CompanyApplyJoinService;
 import com.stone.photoindustry.core.service.CompanyInfoService;
 import com.stone.photoindustry.core.service.UserService;
 
@@ -34,6 +35,9 @@ public class CompanyController {
 	private CompanyInfoService companyInfoService;
 	@Resource
 	private CompanyInfoMapper companyInfoMapper;
+	@Resource
+	private CompanyApplyJoinService companyApplyJoinService;
+	
 	@RequestMapping("/createcompany")
 	public void createCompany(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(name="companyName")String companyName,
@@ -75,12 +79,34 @@ public class CompanyController {
 		HashMap<String, Object> res = new HashMap<String, Object>();
 		try {
 			User user=(User) request.getSession().getAttribute("user");
-			userService.applyJoinCompany(user.getId(), companyId);
-			res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
-			res.put(Constant.RESPONSE_CODE_MSG, "，提交加入门店申请成功，请等待通过");
+			Long applyId=companyApplyJoinService.applyJoinCompany(user.getId(), companyId);
+			if(applyId!=null) {
+				res.put(Constant.RESPONSE_CODE, Constant.SUCCEED_CODE_VALUE);
+				res.put(Constant.RESPONSE_CODE_MSG, "提交加入门店申请成功，请等待通过");
+			}else {
+				res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
+				res.put(Constant.RESPONSE_CODE_MSG, "申请失败，如有疑问请联系客服");
+			}
 		} catch (Exception e) {
 			res.put(Constant.RESPONSE_CODE, Constant.FAIL_CODE_VALUE);
 			res.put(Constant.RESPONSE_CODE_MSG, "申请失败，如有疑问请联系客服");
+		}
+		ServletUtils.writeToResponse(response, res);
+	}
+	
+	@RequestMapping("/checkjoincompany")
+	public void checkCompanyJoin(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(name="id")Long id,
+			@RequestParam(name="userid")Long userId,
+			@RequestParam(name="companyid")Long companyId,
+			@RequestParam(name="Status")int applyStatus) {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		try {
+			companyApplyJoinService.checkJoinCompany(id, companyId, userId, applyStatus);
+			res.put(Constant.RESPONSE_CODE_MSG, Constant.SUCCEED_CODE_VALUE);
+			res.put(Constant.RESPONSE_CODE_MSG, "审核申请成功");
+		} catch (Exception e) {
+			res.put(Constant.RESPONSE_CODE_MSG, Constant.FAIL_CODE_VALUE);
 		}
 		ServletUtils.writeToResponse(response, res);
 	}

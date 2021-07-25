@@ -2,6 +2,10 @@ package com.stone.photoindustry.core.service;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.UserModel;
@@ -27,4 +31,5 @@ public interface UserService extends BaseService<User, Long>{
 	
 	void joinCompany(Long userid,Long companyId);
 	
+	HashMap<String, Object> Auth(String username,String password,HttpServletRequest request, HttpServletResponse response, HttpSession session);
 }
