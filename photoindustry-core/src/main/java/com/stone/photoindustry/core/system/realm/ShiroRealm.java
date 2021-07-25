@@ -27,11 +27,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
-import com.stone.photoindustry.core.domain.Menu;
+import com.stone.photoindustry.core.domain.SysMenu;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.service.UserService;
-import com.stone.photoindustry.core.service.MenuService;
+import com.stone.photoindustry.core.service.SysMenuService;
 
 
 public class ShiroRealm extends AuthorizingRealm{
@@ -41,7 +41,7 @@ public class ShiroRealm extends AuthorizingRealm{
 	@Resource
 	private UserService UserService;
 	@Resource	
-	private MenuService MenuService;
+	private SysMenuService MenuService;
 	@Override
 	/**
 	 * 	授权
@@ -56,9 +56,9 @@ public class ShiroRealm extends AuthorizingRealm{
 			return null;
 		}
 		User user=(User) principals.oneByType(User.class);
-		List<Menu> perms=MenuService.getPermsByUser(user);
+		List<SysMenu> perms=MenuService.getPermsByUser(user);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		for (Menu perm : perms)
+		for (SysMenu perm : perms)
 		{
 			// 基于Permission的权限信息
 			info.addStringPermission(perm.getPerms());

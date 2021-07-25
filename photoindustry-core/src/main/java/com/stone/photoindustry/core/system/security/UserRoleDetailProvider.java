@@ -22,11 +22,11 @@ import org.springframework.util.StringUtils;
 
 import com.stone.photoindustry.core.common.constant.SystemConstant;
 import com.stone.photoindustry.core.common.exception.ServiceException;
-import com.stone.photoindustry.core.domain.Role;
+import com.stone.photoindustry.core.domain.SysRole;
 import com.stone.photoindustry.core.domain.User;
-import com.stone.photoindustry.core.model.MenuModel;
-import com.stone.photoindustry.core.service.MenuService;
-import com.stone.photoindustry.core.service.RoleService;
+import com.stone.photoindustry.core.model.SysMenuModel;
+import com.stone.photoindustry.core.service.SysMenuService;
+import com.stone.photoindustry.core.service.SysRoleService;
 import com.stone.photoindustry.core.service.UserService;
 import tool.util.StringUtil;
 
@@ -41,10 +41,10 @@ public class UserRoleDetailProvider implements UserDetailsService{
 	private UserService UserService;
 
 	@Autowired
-	private RoleService RoleService;
+	private SysRoleService RoleService;
 
 	@Autowired
-	private MenuService MenuService;
+	private SysMenuService MenuService;
 
 	private PasswordEncoder passwordEncoder;
 
@@ -56,7 +56,7 @@ public class UserRoleDetailProvider implements UserDetailsService{
 		if (user == null)	throw new UsernameNotFoundException("用户名:"+userName + ",不存在!");
 		Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();		// 用户授权集合
 		Map<String, UserFunction> functionMap = new HashMap<String, UserFunction>();// 用户资源映射<资源名称, 资源属性集合>
-		List<Role> roleList = RoleService.getRoleListByUserId(user.getId());	// 根据用户Id获得用户角色列表
+		List<SysRole> roleList = RoleService.getRoleListByUserId(user.getId());	// 根据用户Id获得用户角色列表
 		auths.add(new MGrantedAuthority(SystemConstant.ROLE_DEFAULT));			// 设置默认权限
 		if (roleList != null && !roleList.isEmpty()){
 			List<Long> roleIdList = new ArrayList<Long>();
@@ -64,7 +64,7 @@ public class UserRoleDetailProvider implements UserDetailsService{
 				auths.add(new MGrantedAuthority(role.getId().toString()));
 				roleIdList.add(role.getId());
 			});
-			List<MenuModel> menuList = MenuService.getMenuListByRoleIds(roleIdList);		// 根据用户角色Id列表获得该角色拥有的系统功能列表
+			List<SysMenuModel> menuList = MenuService.getMenuListByRoleIds(roleIdList);		// 根据用户角色Id列表获得该角色拥有的系统功能列表
 			if (menuList != null && !menuList.isEmpty()){
 				menuList.forEach(menu->{	// 转换系统功能为用户资源
 					String href = menu.getUrl();
@@ -118,19 +118,19 @@ public class UserRoleDetailProvider implements UserDetailsService{
 		this.UserService =UserService; 
 	}
 	 
-	public RoleService getSysRoleService() { 
+	public SysRoleService getSysRoleService() { 
 		return RoleService; 
 	}
 	
-	public void setSysRoleService(RoleService sysRoleService) {
+	public void setSysRoleService(SysRoleService sysRoleService) {
 		this.RoleService = sysRoleService; 
 	}
 	
-	public MenuService getSysMenuService() { 
+	public SysMenuService getSysMenuService() { 
 		return MenuService; 
 	}
 	
-	public void setSysMenuService(MenuService sysMenuService) {
+	public void setSysMenuService(SysMenuService sysMenuService) {
 		this.MenuService = sysMenuService; 
 	}
 	

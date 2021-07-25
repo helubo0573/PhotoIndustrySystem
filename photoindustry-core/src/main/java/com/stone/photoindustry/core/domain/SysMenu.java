@@ -10,7 +10,7 @@ import java.util.Date;
  * @version 1.0.0
  * @date 2021-06-23 22:26:23
  */
- public class Menu implements Serializable {
+ public class SysMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

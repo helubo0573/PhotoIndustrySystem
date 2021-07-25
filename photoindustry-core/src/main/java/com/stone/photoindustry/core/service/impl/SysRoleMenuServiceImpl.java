@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
-import com.stone.photoindustry.core.mapper.RoleMenuMapper;
-import com.stone.photoindustry.core.domain.RoleMenu;
-import com.stone.photoindustry.core.service.RoleMenuService;
+import com.stone.photoindustry.core.mapper.SysRoleMenuMapper;
+import com.stone.photoindustry.core.domain.SysRoleMenu;
+import com.stone.photoindustry.core.service.SysRoleMenuService;
 
 
 /**
@@ -22,15 +22,15 @@ import com.stone.photoindustry.core.service.RoleMenuService;
  */
  
 @Service("roleMenuService")
-public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu, Long> implements RoleMenuService {
+public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenu, Long> implements SysRoleMenuService {
 	
-    private static final Logger logger = LoggerFactory.getLogger(RoleMenuServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysRoleMenuServiceImpl.class);
    
     @Resource
-    private RoleMenuMapper roleMenuMapper;
+    private SysRoleMenuMapper roleMenuMapper;
 
 	@Override
-	public BaseMapper<RoleMenu, Long> getMapper() {
+	public BaseMapper<SysRoleMenu, Long> getMapper() {
 		return roleMenuMapper;
 	}
 	

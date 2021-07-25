@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- menu表:菜单表模块 -->
-<mapper namespace="com.stone.photoindustry.core.mapper.MenuMapper">
+<mapper namespace="com.stone.photoindustry.core.mapper.SysMenuMapper">
     <!--返回Map-->        
-    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.Menu">
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.SysMenu">
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="parent_id" property="parentId" jdbcType="INTEGER" />
         <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
@@ -58,13 +58,13 @@
     </sql>
     
     
-    <insert id="save" parameterType="com.stone.photoindustry.core.domain.Menu">
-        insert into menu(parent_id,menu_name,url,perms,menu_type,menu_icon,menu_order,company_id,remarks)values(#{parentId,jdbcType=INTEGER},#{menuName,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{perms,jdbcType=VARCHAR},#{menuType,jdbcType=INTEGER},#{menuIcon,jdbcType=VARCHAR},#{menuOrder,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.SysMenu">
+        insert into sys_menu(parent_id,menu_name,url,perms,menu_type,menu_icon,menu_order,company_id,remarks)values(#{parentId,jdbcType=INTEGER},#{menuName,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{perms,jdbcType=VARCHAR},#{menuType,jdbcType=INTEGER},#{menuIcon,jdbcType=VARCHAR},#{menuOrder,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
     </insert>
 
     
-    <update id="update" parameterType="com.stone.photoindustry.core.domain.Menu">
-        update menu set 
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.SysMenu">
+        update sys_menu set 
             parent_id = #{parentId,jdbcType=INTEGER},
             menu_name = #{menuName,jdbcType=VARCHAR},
             url = #{url,jdbcType=VARCHAR},
@@ -79,7 +79,7 @@
 
 
     <update id="updateSelective"  parameterType="java.util.HashMap">
-        update menu
+        update sys_menu
           <set>
             <if test="parentId != null and parentId != '' ">        
                 parent_id = #{parentId,jdbcType=INTEGER},                
@@ -116,21 +116,21 @@
     <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List" />
-        from menu
+        from sys_menu
         where id = #{id,jdbcType=INTEGER}
     </select>
 
 	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from menu
+        from sys_menu
         <include refid="searchBy"/>
     </select>
                
     <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from menu
+        from sys_menu
         <include refid="searchBy"/>
     </select>
     

@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
-import com.stone.photoindustry.core.mapper.MenuMapper;
-import com.stone.photoindustry.core.model.MenuModel;
-import com.stone.photoindustry.core.domain.Menu;
+import com.stone.photoindustry.core.mapper.SysMenuMapper;
+import com.stone.photoindustry.core.model.SysMenuModel;
+import com.stone.photoindustry.core.domain.SysMenu;
 import com.stone.photoindustry.core.domain.User;
-import com.stone.photoindustry.core.service.MenuService;
+import com.stone.photoindustry.core.service.SysMenuService;
 
 
 /**
@@ -26,26 +26,26 @@ import com.stone.photoindustry.core.service.MenuService;
  */
  
 @Service("menuService")
-public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements MenuService {
+public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu, Long> implements SysMenuService {
 	
-    private static final Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysMenuServiceImpl.class);
    
     @Resource
-    private MenuMapper menuMapper;
+    private SysMenuMapper menuMapper;
 
 	@Override
-	public BaseMapper<Menu, Long> getMapper() {
+	public BaseMapper<SysMenu, Long> getMapper() {
 		return menuMapper;
 	}
 
 	@Override
-	public List<MenuModel> getMenuListByRoleIds(List<Long> roleIdList) {
+	public List<SysMenuModel> getMenuListByRoleIds(List<Long> roleIdList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Menu> getPermsByUser(User user) {
+	public List<SysMenu> getPermsByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

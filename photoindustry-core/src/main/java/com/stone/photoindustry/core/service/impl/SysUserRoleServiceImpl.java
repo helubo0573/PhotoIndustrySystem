@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
-import com.stone.photoindustry.core.mapper.UserRoleMapper;
-import com.stone.photoindustry.core.domain.UserRole;
-import com.stone.photoindustry.core.service.UserRoleService;
+import com.stone.photoindustry.core.mapper.SysUserRoleMapper;
+import com.stone.photoindustry.core.domain.SysUserRole;
+import com.stone.photoindustry.core.service.SysUserRoleService;
 
 
 /**
@@ -22,15 +22,15 @@ import com.stone.photoindustry.core.service.UserRoleService;
  */
  
 @Service("userRoleService")
-public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Long> implements UserRoleService {
+public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRole, Long> implements SysUserRoleService {
 	
-    private static final Logger logger = LoggerFactory.getLogger(UserRoleServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysUserRoleServiceImpl.class);
    
     @Resource
-    private UserRoleMapper userRoleMapper;
+    private SysUserRoleMapper userRoleMapper;
 
 	@Override
-	public BaseMapper<UserRole, Long> getMapper() {
+	public BaseMapper<SysUserRole, Long> getMapper() {
 		return userRoleMapper;
 	}
 	

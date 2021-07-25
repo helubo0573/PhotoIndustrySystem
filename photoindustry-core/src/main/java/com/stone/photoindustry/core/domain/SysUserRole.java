@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 角色菜单映射表实体
+ * 用户角色映射表实体
  * 
  * @author stone
  * @version 1.0.0
- * @date 2021-06-23 22:30:59
+ * @date 2021-06-23 22:31:39
  */
- public class RoleMenu implements Serializable {
+ public class SysUserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /*** 主键Id*/
     private Long id;
 
+    /*** 用户ID*/
+    private Integer userId;
+
     /*** 角色ID*/
     private Integer roleId;
 
-    /*** 单菜ID*/
-    private Integer menuId;
-
-    /*** */
+    /*** 公司ID*/
     private String companyId;
 
 
@@ -43,6 +43,22 @@ import java.util.Date;
         this.id = id;
     }
 
+    /*** 获取用户ID
+    *
+    * @return 用户ID
+    */
+    public Integer getUserId(){
+        return userId;
+    }
+
+    /*** 设置用户ID
+    * 
+    * @param userId 要设置的用户ID
+    */
+    public void setUserId(Integer userId){
+        this.userId = userId;
+    }
+
     /*** 获取角色ID
     *
     * @return 角色ID
@@ -59,33 +75,17 @@ import java.util.Date;
         this.roleId = roleId;
     }
 
-    /*** 获取单菜ID
+    /*** 获取公司ID
     *
-    * @return 单菜ID
-    */
-    public Integer getMenuId(){
-        return menuId;
-    }
-
-    /*** 设置单菜ID
-    * 
-    * @param menuId 要设置的单菜ID
-    */
-    public void setMenuId(Integer menuId){
-        this.menuId = menuId;
-    }
-
-    /*** 获取
-    *
-    * @return 
+    * @return 公司ID
     */
     public String getCompanyId(){
         return companyId;
     }
 
-    /*** 设置
+    /*** 设置公司ID
     * 
-    * @param companyId 要设置的
+    * @param companyId 要设置的公司ID
     */
     public void setCompanyId(String companyId){
         this.companyId = companyId;

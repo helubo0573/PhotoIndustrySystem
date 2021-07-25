@@ -2,7 +2,7 @@ package com.stone.photoindustry.core.mapper;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.mapper.RDBatisDao;
-import com.stone.photoindustry.core.domain.Menu;
+import com.stone.photoindustry.core.domain.SysMenu;
 
 /**
  * 菜单表Dao
@@ -12,7 +12,7 @@ import com.stone.photoindustry.core.domain.Menu;
  * @date 2021-06-23 22:26:23
  */
 @RDBatisDao
-public interface MenuMapper extends BaseMapper<Menu, Long> {
+public interface SysMenuMapper extends BaseMapper<SysMenu, Long> {
 
     
 

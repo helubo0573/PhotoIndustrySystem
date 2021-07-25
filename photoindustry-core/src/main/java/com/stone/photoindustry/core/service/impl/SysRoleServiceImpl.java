@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
-import com.stone.photoindustry.core.mapper.RoleMapper;
-import com.stone.photoindustry.core.domain.Role;
-import com.stone.photoindustry.core.service.RoleService;
+import com.stone.photoindustry.core.mapper.SysRoleMapper;
+import com.stone.photoindustry.core.domain.SysRole;
+import com.stone.photoindustry.core.service.SysRoleService;
 
 
 /**
@@ -24,20 +24,20 @@ import com.stone.photoindustry.core.service.RoleService;
  */
  
 @Service("roleService")
-public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements RoleService {
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRole, Long> implements SysRoleService {
 	
-    private static final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysRoleServiceImpl.class);
    
     @Resource
-    private RoleMapper roleMapper;
+    private SysRoleMapper roleMapper;
 
 	@Override
-	public BaseMapper<Role, Long> getMapper() {
+	public BaseMapper<SysRole, Long> getMapper() {
 		return roleMapper;
 	}
 
 	@Override
-	public List<Role> getRoleListByUserId(Long id) {
+	public List<SysRole> getRoleListByUserId(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

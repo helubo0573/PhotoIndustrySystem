@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- user_role表:用户角色映射表模块 -->
-<mapper namespace="com.stone.photoindustry.core.mapper.RoleMapper">
+<mapper namespace="com.stone.photoindustry.core.mapper.SysRoleMapper">
     <!--返回Map-->        
-    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.Role">
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.SysRole">
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="role_id" property="roleId" jdbcType="INTEGER" />
@@ -34,13 +34,13 @@
     </sql>
     
     
-    <insert id="save" parameterType="com.stone.photoindustry.core.domain.Role">
-        insert into user_role(user_id,role_id,company_id)values(#{userId,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR})
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.SysRole">
+        insert into sys_user_role(user_id,role_id,company_id)values(#{userId,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER},#{companyId,jdbcType=VARCHAR})
     </insert>
 
     
-    <update id="update" parameterType="com.stone.photoindustry.core.domain.Role">
-        update user_role set 
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.SysRole">
+        update sys_user_role set 
             user_id = #{userId,jdbcType=INTEGER},
             role_id = #{roleId,jdbcType=INTEGER},
             company_id = #{companyId,jdbcType=VARCHAR}
@@ -49,7 +49,7 @@
 
 
     <update id="updateSelective"  parameterType="java.util.HashMap">
-        update user_role
+        update sys_user_role
           <set>
             <if test="userId != null and userId != '' ">        
                 user_id = #{userId,jdbcType=INTEGER},                
@@ -68,21 +68,21 @@
     <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List" />
-        from user_role
+        from sys_user_role
         where id = #{id,jdbcType=INTEGER}
     </select>
 
 	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from user_role
+        from sys_user_role
         <include refid="searchBy"/>
     </select>
                
     <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
         select
         <include refid="Base_Column_List" />
-        from user_role
+        from sys_user_role
         <include refid="searchBy"/>
     </select>
     
