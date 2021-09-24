@@ -6,6 +6,7 @@ import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.SysMenu;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.SysMenuModel;
+import com.stone.photoindustry.core.model.UserModel;
 
 /**
  * 菜单表Service
@@ -20,4 +21,5 @@ public interface SysMenuService extends BaseService<SysMenu, Long>{
 
 	List<SysMenu> getPermsByUser(User user);
 
+	List<SysMenu> getMunuByUser(UserModel user);
 }

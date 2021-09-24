@@ -134,4 +134,26 @@
         <include refid="searchBy"/>
     </select>
     
+    <select id="getMenuByUserName" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    	SELECT DISTINCT
+			menu.parent_id AS parent_id,
+			menu.menu_name AS menu_name,
+			menu.url AS url,
+			menu.perms AS perms,
+			menu.menu_type AS menu_type,
+			menu.menu_icon AS menu_icon,
+			menu.menu_order AS menu_order,
+			menu.remarks AS remarks,
+			menu.id AS id
+		FROM
+			(((sys_menu AS menu
+			Inner Join sys_role_menu AS role_menu ON ((role_menu.menu_id = menu.id)))
+			Inner Join sys_role AS role ON ((role.id = role_menu.role_id)))
+			Inner Join sys_user_role AS user_role ON ((user_role.role_id = role.id)))
+			Inner Join sys_user AS `user` ON ((`user`.id = user_role.user_id))
+		WHERE
+			user.username =#{user} and role_menu.company_id=#{companyid} menu.menu_type != 2
+		ORDER BY
+			menu_type,menu_order
+    </select>
 </mapper>

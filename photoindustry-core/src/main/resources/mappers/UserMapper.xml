@@ -17,7 +17,7 @@
     </resultMap>
     
     <resultMap type="com.stone.photoindustry.core.model.UserModel" id="ModelResultMap" extends="BaseResultMap">
-    
+    	
     </resultMap>
     
     <!--基本的sql查询字段 公共引用...-->

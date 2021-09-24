@@ -1,5 +1,8 @@
 package com.stone.photoindustry.core.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.mapper.RDBatisDao;
 import com.stone.photoindustry.core.domain.SysMenu;
@@ -14,6 +17,6 @@ import com.stone.photoindustry.core.domain.SysMenu;
 @RDBatisDao
 public interface SysMenuMapper extends BaseMapper<SysMenu, Long> {
 
-    
+	List<SysMenu> getMenuByUserName(HashMap<String, Object> param);
 
 }

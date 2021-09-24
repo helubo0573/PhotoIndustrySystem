@@ -1,5 +1,6 @@
 package com.stone.photoindustry.core.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,8 +13,10 @@ import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
 import com.stone.photoindustry.core.mapper.SysMenuMapper;
 import com.stone.photoindustry.core.model.SysMenuModel;
+import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.domain.SysMenu;
 import com.stone.photoindustry.core.domain.User;
+import com.stone.photoindustry.core.service.CompanyInfoService;
 import com.stone.photoindustry.core.service.SysMenuService;
 
 
@@ -32,7 +35,9 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu, Long> implement
    
     @Resource
     private SysMenuMapper menuMapper;
-
+    
+    @Resource
+    private CompanyInfoService companyInfoService;
 	@Override
 	public BaseMapper<SysMenu, Long> getMapper() {
 		return menuMapper;
@@ -48,6 +53,18 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu, Long> implement
 	public List<SysMenu> getPermsByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<SysMenu> getMunuByUser(UserModel user) {
+		if(companyInfoService.getAdminId(user.getCompanyId())==user.getId()) {	//判断是否为管理员
+			return menuMapper.listSelective(null);
+		}else {
+			HashMap<String, Object> param=new HashMap<String,Object>();
+			param.put("user", user.getUserName());
+			param.put("companyid", user.getCompanyId());
+			return menuMapper.getMenuByUserName(param);
+		}
 	}
 	
 }

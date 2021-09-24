@@ -46,5 +46,11 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo, Long> i
 		System.out.println("testcom");
 		return num>0?true:false;
 	}
+
+	@Override
+	public Long getAdminId(Long id) {
+		CompanyInfo company=companyInfoMapper.findByPrimary(id);
+		return company.getOriginatorId();
+	}
 	
 }
