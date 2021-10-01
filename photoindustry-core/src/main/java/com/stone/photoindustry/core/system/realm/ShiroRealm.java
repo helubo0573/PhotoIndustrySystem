@@ -31,6 +31,7 @@ import com.stone.photoindustry.core.domain.SysMenu;
 import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.model.UserModel;
 import com.stone.photoindustry.core.service.UserService;
+import com.stone.photoindustry.core.service.CompanyInfoService;
 import com.stone.photoindustry.core.service.SysMenuService;
 
 
@@ -39,6 +40,8 @@ public class ShiroRealm extends AuthorizingRealm{
 	private static final Logger logger = Logger.getLogger(ShiroRealm.class);
 
 	@Resource
+	private CompanyInfoService companyInfoService;
+	@Resource
 	private UserService UserService;
 	@Resource	
 	private SysMenuService MenuService;
@@ -46,22 +49,26 @@ public class ShiroRealm extends AuthorizingRealm{
 	/**
 	 * 	授权
 	 */
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals)
-	{
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
+		User user=(User) principals.oneByType(User.class);
+		logger.info("test-----"+user.getId()+"----"+companyInfoService.getAdminId(user.getCompanyId()));
 		logger.info("授权认证：" + principals.getRealmNames());
 		// (关闭浏览器，或超时)非正常退出，即没有显式调用 SecurityUtils.getSubject().logout()
 		if (!SecurityUtils.getSubject().isAuthenticated()){
+			logger.info("over");
 			doClearCache(principals);
 			SecurityUtils.getSubject().logout();
 			return null;
 		}
-		User user=(User) principals.oneByType(User.class);
-		List<SysMenu> perms=MenuService.getPermsByUser(user);
+		List<SysMenu> perms;
+		if(companyInfoService.getAdminId(user.getCompanyId())==user.getId()) {
+			perms=MenuService.getAllperms(user.getCompanyId());
+		}else{
+			perms=MenuService.getPermsByUser(user);
+		}
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		for (SysMenu perm : perms)
-		{
-			// 基于Permission的权限信息
-			info.addStringPermission(perm.getPerms());
+		for (SysMenu perm : perms){
+			info.addStringPermission(perm.getPerms());		//遍历所有获取的权限字串
 		}
 		return info;
 	}

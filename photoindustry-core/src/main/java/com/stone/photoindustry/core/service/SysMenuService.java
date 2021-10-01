@@ -22,4 +22,6 @@ public interface SysMenuService extends BaseService<SysMenu, Long>{
 	List<SysMenu> getPermsByUser(User user);
 
 	List<SysMenu> getMunuByUser(UserModel user);
+	
+	List<SysMenu> getAllperms(Long companyid);
 }

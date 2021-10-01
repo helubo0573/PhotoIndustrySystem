@@ -66,5 +66,11 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu, Long> implement
 			return menuMapper.getMenuByUserName(param);
 		}
 	}
+
+	@Override
+	public List<SysMenu> getAllperms(Long companyid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
