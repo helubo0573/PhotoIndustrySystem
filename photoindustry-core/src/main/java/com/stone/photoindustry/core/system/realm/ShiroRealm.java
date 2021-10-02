@@ -51,7 +51,6 @@ public class ShiroRealm extends AuthorizingRealm{
 	 */
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
 		User user=(User) principals.oneByType(User.class);
-		logger.info("test-----"+user.getId()+"----"+companyInfoService.getAdminId(user.getCompanyId()));
 		logger.info("授权认证：" + principals.getRealmNames());
 		// (关闭浏览器，或超时)非正常退出，即没有显式调用 SecurityUtils.getSubject().logout()
 		if (!SecurityUtils.getSubject().isAuthenticated()){
@@ -61,13 +60,14 @@ public class ShiroRealm extends AuthorizingRealm{
 			return null;
 		}
 		List<SysMenu> perms;
-		if(companyInfoService.getAdminId(user.getCompanyId())==user.getId()) {
+		if(companyInfoService.checkAdmin(user)) {
 			perms=MenuService.getAllperms(user.getCompanyId());
 		}else{
 			perms=MenuService.getPermsByUser(user);
 		}
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		for (SysMenu perm : perms){
+			if(perm.getPerms().length()>0)
 			info.addStringPermission(perm.getPerms());		//遍历所有获取的权限字串
 		}
 		return info;

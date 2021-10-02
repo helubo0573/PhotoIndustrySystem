@@ -13,6 +13,7 @@ import com.stone.photoindustry.core.common.mapper.BaseMapper;
 import com.stone.photoindustry.core.common.service.impl.BaseServiceImpl;
 import com.stone.photoindustry.core.mapper.CompanyInfoMapper;
 import com.stone.photoindustry.core.domain.CompanyInfo;
+import com.stone.photoindustry.core.domain.User;
 import com.stone.photoindustry.core.service.CompanyInfoService;
 
 
@@ -51,6 +52,14 @@ public class CompanyInfoServiceImpl extends BaseServiceImpl<CompanyInfo, Long> i
 	public Long getAdminId(Long id) {
 		CompanyInfo company=companyInfoMapper.findByPrimary(id);
 		return company.getOriginatorId();
+	}
+
+	@Override
+	public boolean checkAdmin(User user) {
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("id", user.getCompanyId());
+		param.put("originatorId", user.getId());
+		return companyInfoMapper.checkAdmin(param);
 	}
 	
 }

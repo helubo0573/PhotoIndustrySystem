@@ -2,6 +2,7 @@ package com.stone.photoindustry.core.service;
 
 import com.stone.photoindustry.core.common.service.BaseService;
 import com.stone.photoindustry.core.domain.CompanyInfo;
+import com.stone.photoindustry.core.domain.User;
 
 /**
  * 门店(公司)信息表Service
@@ -15,4 +16,6 @@ public interface CompanyInfoService extends BaseService<CompanyInfo, Long>{
 	boolean checkCompanyNameExist(String cname,String clocation);
 	
 	Long getAdminId(Long id);
+	
+	boolean checkAdmin(User user);
 }

@@ -36,7 +36,7 @@
 			<ul class="metismenu" id="menu">	<!--左侧手风琴折叠菜单实现，在app.css中设定样式-->
 			</ul>
 		</div>
-		<header class="top-header">	<!-- 页面头部 -->
+		<header class="top-header"><!-- 页面头部 -->
 		</header>
 		<div class="page-wrapper"> <!-- 页面内容主题 -->
 			<div class="page-content-wrapper">

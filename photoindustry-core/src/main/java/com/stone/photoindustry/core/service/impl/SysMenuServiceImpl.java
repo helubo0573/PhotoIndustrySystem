@@ -69,8 +69,9 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu, Long> implement
 
 	@Override
 	public List<SysMenu> getAllperms(Long companyid) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("companyId",companyid);
+		return menuMapper.listSelective(param);
 	}
 	
 }

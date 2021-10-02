@@ -37,15 +37,15 @@
 			</div>
 		</form>
 		<div id="role-btn" class="btn-div">
-			<shiro:hasPermission name="sys:role:save,Administrator">
+			<shiro:hasPermission name="sys:role:save">
 				<button id="insert-btn" class="btn btn-success" onclick="insertRole()">新增</button>
 				<button id="update-btn" class="btn btn-info" onclick="updateRole()" disabled>修改</button>
 			</shiro:hasPermission>
-			<shiro:hasPermission name="sys:role:delete,Administrator">
+			<shiro:hasPermission name="sys:role:delete">
 				<button id="delete-btn" class="btn btn-danger" onclick="deleteRole()" disabled>删除</button>
 			</shiro:hasPermission>
 			<button id="reset-btn" class="btn btn-warning" onclick="resetRole()">重置</button><br><br>
-			<shiro:hasPermission name="sys:role:setmenu,Administrator">
+			<shiro:hasPermission name="sys:role:setmenu">
 				<button id="rolemenu-btn" class="btn btn-success" disabled onclick="setRoleTMenu()">角色资源维护</button>
 			</shiro:hasPermission>
 		</div>

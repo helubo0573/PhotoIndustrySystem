@@ -20,4 +20,11 @@ public interface CompanyInfoMapper extends BaseMapper<CompanyInfo, Long> {
     int checkCompanyName(HashMap<String, Object> param);
 
     List<CompanyInfo> ListMoreSelective(HashMap<String, Object> param);
+    
+    /**
+     * 	校验用户是否为公司下的管理员权限
+     * @param param	id:公司id  originatorId:用户id
+     * @return
+     */
+    boolean checkAdmin(HashMap<String, Object> param);
 }

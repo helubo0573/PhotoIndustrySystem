@@ -143,4 +143,15 @@
         from company_info
         <include refid="searchEXT"/>
     </select>
+    
+    <select id="checkAdmin" parameterType="java.util.HashMap" resultType="java.lang.Boolean">
+    	<![CDATA[
+    		select 
+    			count(id) 
+    		from company_info 
+    		where 
+    			id = #{id,jdbcType=INTEGER} and 
+    			originator_id=#{originatorId,jdbcType=INTEGER}
+    	]]>
+    </select>
 </mapper>
