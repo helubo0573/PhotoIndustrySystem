@@ -10,11 +10,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div style="padding: 10px;	text-align: center;">
+	<div style="padding: 10px;">
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 20px;">
 			角色信息维护
 		</div>
-		<form id="roleinfo-form" class="form-horizontal info-div" style="overflow: hidden;">
+		<form id="roleinfo-form" class="form-horizontal info-div" style="overflow: hidden;	text-align: left;">
 			<input type="hidden" id="roleid-info" name="roleid">
 			<input type="hidden" id="deptid-info" name="deptid">
 			<div class="form-group">
