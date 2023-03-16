@@ -10,30 +10,48 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div style="padding: 10px;">
+	<div style="padding: 10px;	text-align: center;">
 		<div class="h5" style="border-bottom: 60%;margin-bottom: 20px;">
 			角色信息维护
 		</div>
-		<form id="roleinfo-form" class="form-horizontal info-div" style="overflow: hidden;	text-align: left;">
+		<form id="roleinfo-form" class="form-horizontal info-div" style="overflow: hidden;">
 			<input type="hidden" id="roleid-info" name="roleid">
 			<input type="hidden" id="deptid-info" name="deptid">
-			<div class="form-group">
-			    <label class="col-lg-3 control-label">角色名称:</label>
-			    <div class="col-lg-7">
-			      <input class="form-control needing" id="rolename-info" name="rolename" placeholder="请输入角色名称">
-			    </div>
-			</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 			    <label  class="col-lg-3 control-label">所属部门:</label>
 			    <div class="col-lg-7">
 			      <input class="form-control" id="roledept-info" placeholder="不选则为全局角色" readonly="readonly" style="cursor: pointer;">
 			    </div>
-			</div>
+			</div> 
 			<div class="form-group">
 			    <label class="col-lg-3 control-label">备注:</label>
 			    <div class="col-lg-7">
 			      <textarea id="roleremarks-info" name="remarks" class="form-control" rows="2" cols="" style="resize: none;" placeholder="填写资源说明"></textarea>
 			    </div>
+			</div> -->
+			<div class="input-group mb-3 col-lg-12" >
+				<div class="input-group-prepend">	
+					<span class="input-group-text">
+						角色名称
+					</span>
+				</div>
+				<input type="text" class="form-control" id="rolename-info" name="rolename" placeholder="请输入角色名称" aria-describedby="basic-addon3">
+			</div>
+			<div class="input-group mb-3 col-lg-12" >
+				<div class="input-group-prepend">	
+					<span class="input-group-text">
+						所属部门
+					</span>
+				</div>
+				<input type="text" class="form-control" id="roledept-info" placeholder="不选则为全局角色" readonly="readonly" style="cursor: pointer; aria-describedby="basic-addon3">
+			</div>
+			<div class="input-group mb-3 col-lg-12" >
+				<div class="input-group-prepend">	
+					<span class="input-group-text">
+						备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
+					</span>
+				</div>
+				<textarea id="roleremarks-info" name="remarks" class="form-control" rows="3" style="resize: none;" placeholder="填写资源说明"></textarea>
 			</div>
 		</form>
 		<div id="role-btn" class="btn-div">

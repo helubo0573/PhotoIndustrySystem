@@ -72,7 +72,9 @@ a:hover {
 }
 
 /*Header*/
-
+.info-div{
+	padding:5px;
+}
 .wrapper {
 
 	width: 100%;
@@ -873,7 +875,7 @@ a:hover {
 
 .page-content {
 
-	padding: 5px;
+	padding: 5px 5px 0px 5px;
 
 }
 

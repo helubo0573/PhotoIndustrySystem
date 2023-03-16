@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 </head>
-<script type="text/javascript" src="../js/SysRole.js?d=202007111"></script>
+<!-- <script type="text/javascript" src="../js/SysRole.js?d=202007111"></script> -->
 <body>
 	<div class="body-sdiv">
 		<div class="title-div">

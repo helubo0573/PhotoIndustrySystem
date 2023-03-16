@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css?d=202104231" />
 <!-- Icons CSS -->
 <link rel="stylesheet" href="../css/icons.css" />
-<link rel="stylesheet" href="../css/System.css?d=202104232"> <!-- 主体样式 -->
+<link rel="stylesheet" href="../css/System.css?d=202104233"> <!-- 主体样式 -->
 <link rel="stylesheet" type="text/css" href="../plugins/datatable/css/dataTables.bootstrap4.min.css?d=202104231">
 </head>
 <body class="bg-theme bg-theme1">	<!-- 在body中设置css属性实现动态背景 -->

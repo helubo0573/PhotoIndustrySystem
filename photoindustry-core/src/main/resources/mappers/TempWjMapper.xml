@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- temp_wj表:门店申请加入表模块 -->
+<mapper namespace="com.stone.photoindustry.core.mapper.TempWjMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.TempWj">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+        <result column="stone" property="stone" jdbcType="VARCHAR" />
+        <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+        <result column="goods_size" property="goodsSize" jdbcType="VARCHAR" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="VARCHAR" />
+        <result column="amount" property="amount" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,type_name,stone,supplier,goods_name,goods_size,unit,price,amount 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="typeName != null and typeName != '' ">
+                and type_name = #{typeName,jdbcType=VARCHAR}
+            </if>
+            <if test="stone != null and stone != '' ">
+                and stone = #{stone,jdbcType=VARCHAR}
+            </if>
+            <if test="supplier != null and supplier != '' ">
+                and supplier = #{supplier,jdbcType=VARCHAR}
+            </if>
+            <if test="goodsName != null and goodsName != '' ">
+                and goods_name = #{goodsName,jdbcType=VARCHAR}
+            </if>
+            <if test="goodsSize != null and goodsSize != '' ">
+                and goods_size = #{goodsSize,jdbcType=VARCHAR}
+            </if>
+            <if test="unit != null and unit != '' ">
+                and unit = #{unit,jdbcType=VARCHAR}
+            </if>
+            <if test="price != null and price != '' ">
+                and price = #{price,jdbcType=VARCHAR}
+            </if>
+            <if test="amount != null and amount != '' ">
+                and amount = #{amount,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.TempWj">
+        insert into temp_wj(type_name,stone,supplier,goods_name,goods_size,unit,price,amount)values(#{typeName,jdbcType=VARCHAR},#{stone,jdbcType=VARCHAR},#{supplier,jdbcType=VARCHAR},#{goodsName,jdbcType=VARCHAR},#{goodsSize,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR},#{price,jdbcType=VARCHAR},#{amount,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.TempWj">
+        update temp_wj set 
+            type_name = #{typeName,jdbcType=VARCHAR},
+            stone = #{stone,jdbcType=VARCHAR},
+            supplier = #{supplier,jdbcType=VARCHAR},
+            goods_name = #{goodsName,jdbcType=VARCHAR},
+            goods_size = #{goodsSize,jdbcType=VARCHAR},
+            unit = #{unit,jdbcType=VARCHAR},
+            price = #{price,jdbcType=VARCHAR},
+            amount = #{amount,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update temp_wj
+          <set>
+            <if test="typeName != null and typeName != '' ">        
+                type_name = #{typeName,jdbcType=VARCHAR},                
+            </if>
+            <if test="stone != null and stone != '' ">        
+                stone = #{stone,jdbcType=VARCHAR},                
+            </if>
+            <if test="supplier != null and supplier != '' ">        
+                supplier = #{supplier,jdbcType=VARCHAR},                
+            </if>
+            <if test="goodsName != null and goodsName != '' ">        
+                goods_name = #{goodsName,jdbcType=VARCHAR},                
+            </if>
+            <if test="goodsSize != null and goodsSize != '' ">        
+                goods_size = #{goodsSize,jdbcType=VARCHAR},                
+            </if>
+            <if test="unit != null and unit != '' ">        
+                unit = #{unit,jdbcType=VARCHAR},                
+            </if>
+            <if test="price != null and price != '' ">        
+                price = #{price,jdbcType=VARCHAR},                
+            </if>
+            <if test="amount != null and amount != '' ">        
+                amount = #{amount,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from temp_wj
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from temp_wj
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from temp_wj
+        <include refid="searchBy"/>
+    </select>
+
+</mapper>

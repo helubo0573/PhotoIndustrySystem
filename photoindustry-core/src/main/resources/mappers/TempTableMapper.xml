@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- temp_table表:门店申请加入表模块 -->
+<mapper namespace="com.stone.photoindustry.core.mapper.TempTableMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.stone.photoindustry.core.domain.TempTable">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="typename" property="typename" jdbcType="VARCHAR" />
+        <result column="dtail" property="dtail" jdbcType="INTEGER" />
+        <result column="goods_rename" property="goodsRename" jdbcType="VARCHAR" />
+        <result column="help_code" property="helpCode" jdbcType="VARCHAR" />
+        <result column="size" property="size" jdbcType="VARCHAR" />
+        <result column="op_name" property="opName" jdbcType="VARCHAR" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="stock" property="stock" jdbcType="VARCHAR" />
+        <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+        <result column="goods_stroe" property="goodsStroe" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id,code,typename,dtail,goods_rename,help_code,size,op_name,unit,stock,supplier,goods_stroe 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test=" id != null and id != '' ">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="code != null and code != '' ">
+                and code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="typename != null and typename != '' ">
+                and typename = #{typename,jdbcType=VARCHAR}
+            </if>
+            <if test="dtail != null and dtail != '' ">
+                and dtail = #{dtail,jdbcType=INTEGER}
+            </if>
+            <if test="goodsRename != null and goodsRename != '' ">
+                and goods_rename = #{goodsRename,jdbcType=VARCHAR}
+            </if>
+            <if test="helpCode != null and helpCode != '' ">
+                and help_code = #{helpCode,jdbcType=VARCHAR}
+            </if>
+            <if test="size != null and size != '' ">
+                and size = #{size,jdbcType=VARCHAR}
+            </if>
+            <if test="opName != null and opName != '' ">
+                and op_name = #{opName,jdbcType=VARCHAR}
+            </if>
+            <if test="unit != null and unit != '' ">
+                and unit = #{unit,jdbcType=VARCHAR}
+            </if>
+            <if test="stock != null and stock != '' ">
+                and stock = #{stock,jdbcType=VARCHAR}
+            </if>
+            <if test="supplier != null and supplier != '' ">
+                and supplier = #{supplier,jdbcType=VARCHAR}
+            </if>
+            <if test="goodsStroe != null and goodsStroe != '' ">
+                and goods_stroe = #{goodsStroe,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.stone.photoindustry.core.domain.TempTable">
+        insert into temp_table(code,typename,dtail,goods_rename,help_code,size,op_name,unit,stock,supplier,goods_stroe)values(#{code,jdbcType=VARCHAR},#{typename,jdbcType=VARCHAR},#{dtail,jdbcType=INTEGER},#{goodsRename,jdbcType=VARCHAR},#{helpCode,jdbcType=VARCHAR},#{size,jdbcType=VARCHAR},#{opName,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR},#{stock,jdbcType=VARCHAR},#{supplier,jdbcType=VARCHAR},#{goodsStroe,jdbcType=VARCHAR})
+    </insert>
+
+    
+    <update id="update" parameterType="com.stone.photoindustry.core.domain.TempTable">
+        update temp_table set 
+            code = #{code,jdbcType=VARCHAR},
+            typename = #{typename,jdbcType=VARCHAR},
+            dtail = #{dtail,jdbcType=INTEGER},
+            goods_rename = #{goodsRename,jdbcType=VARCHAR},
+            help_code = #{helpCode,jdbcType=VARCHAR},
+            size = #{size,jdbcType=VARCHAR},
+            op_name = #{opName,jdbcType=VARCHAR},
+            unit = #{unit,jdbcType=VARCHAR},
+            stock = #{stock,jdbcType=VARCHAR},
+            supplier = #{supplier,jdbcType=VARCHAR},
+            goods_stroe = #{goodsStroe,jdbcType=VARCHAR}
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update temp_table
+          <set>
+            <if test="code != null and code != '' ">        
+                code = #{code,jdbcType=VARCHAR},                
+            </if>
+            <if test="typename != null and typename != '' ">        
+                typename = #{typename,jdbcType=VARCHAR},                
+            </if>
+            <if test="dtail != null and dtail != '' ">        
+                dtail = #{dtail,jdbcType=INTEGER},                
+            </if>
+            <if test="goodsRename != null and goodsRename != '' ">        
+                goods_rename = #{goodsRename,jdbcType=VARCHAR},                
+            </if>
+            <if test="helpCode != null and helpCode != '' ">        
+                help_code = #{helpCode,jdbcType=VARCHAR},                
+            </if>
+            <if test="size != null and size != '' ">        
+                size = #{size,jdbcType=VARCHAR},                
+            </if>
+            <if test="opName != null and opName != '' ">        
+                op_name = #{opName,jdbcType=VARCHAR},                
+            </if>
+            <if test="unit != null and unit != '' ">        
+                unit = #{unit,jdbcType=VARCHAR},                
+            </if>
+            <if test="stock != null and stock != '' ">        
+                stock = #{stock,jdbcType=VARCHAR},                
+            </if>
+            <if test="supplier != null and supplier != '' ">        
+                supplier = #{supplier,jdbcType=VARCHAR},                
+            </if>
+            <if test="goodsStroe != null and goodsStroe != '' ">        
+                goods_stroe = #{goodsStroe,jdbcType=VARCHAR}                
+            </if>
+        </set>    
+        where id = #{id ,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from temp_table
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from temp_table
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from temp_table
+        <include refid="searchBy"/>
+    </select>
+    
+        
+    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	select	count(*)
+        from temp_table
+        where code like CONCAT("%",#{code,jdbcType=VARCHAR},"%")
+    </select>
+        
+</mapper>

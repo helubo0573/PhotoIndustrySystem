@@ -15,7 +15,7 @@ public class Create
 	final static String mapperpath = "mappers/";				// Mapper文件存储地址 默认在resources中
 	//以下是需要配置的参数
 	//表名
-	final static String table = "company_apply_join";
+	final static String table = "temp_table";
 	//类说明
 	final static String functionName = "门店申请加入表";
 	//包路径
@@ -23,7 +23,7 @@ public class Create
 	//module名称
 	final static String moduleName = "core";
 	// 类名前缀
-	final static String classNamePrefix = "CompanyApplyJoin";
+	final static String classNamePrefix = "TempTable";
 	public static final Logger logger = LoggerFactory.getLogger(Create.class);
 
 	public static void main(String[] args){

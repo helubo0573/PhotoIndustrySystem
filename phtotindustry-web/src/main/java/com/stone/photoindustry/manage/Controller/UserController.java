@@ -74,4 +74,13 @@ public class UserController {
 		}
 		ServletUtils.writeToResponse(response, res);
 	}
+	
+	@RequestMapping("/temp")
+	public void tempRequest(HttpServletResponse response, HttpServletRequest request) {
+		HashMap<String, Object> res = new HashMap<String, Object>();
+		res.put("value", "OK");
+		res.put("content", "这是一个用于测试回调的方法");
+		res.put("err_code","1005");
+		ServletUtils.writeToResponse(response, res);
+	}
 }
